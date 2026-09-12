@@ -1,5 +1,16 @@
+# ---- Stage 1: build ----
+FROM node:20-alpine AS build
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+COPY . .
+RUN npm run build -- --configuration=production
+
+# ---- Stage 2: runtime ----
 FROM nginx:alpine
-COPY dist/qualificando-frontend /usr/share/nginx/html
+COPY --from=build /app/dist/qualificando-frontend /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
