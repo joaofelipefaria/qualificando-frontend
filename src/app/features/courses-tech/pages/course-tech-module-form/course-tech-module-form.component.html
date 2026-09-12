@@ -1,0 +1,50 @@
+<div class="page-header">
+  <button mat-icon-button [routerLink]="['/courses-tech', courseId]" [attr.aria-label]="'common.back' | translate">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h1>{{ (isEditMode ? 'coursesTech.moduleForm.editTitle' : 'coursesTech.moduleForm.newTitle') | translate }}</h1>
+</div>
+
+<mat-card class="form-card">
+  <mat-card-content>
+    <div class="loading-inline" *ngIf="loading">
+      <mat-progress-spinner mode="indeterminate" diameter="32"></mat-progress-spinner>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!loading">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'coursesTech.moduleForm.name' | translate }}</mat-label>
+        <input matInput formControlName="title" [placeholder]="'coursesTech.moduleForm.namePlaceholder' | translate">
+        <mat-error *ngIf="form.controls.title.hasError('required')">{{ 'coursesTech.moduleForm.nameRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'coursesTech.moduleForm.description' | translate }}</mat-label>
+        <textarea matInput formControlName="description" rows="3" [placeholder]="'coursesTech.moduleForm.descriptionPlaceholder' | translate"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'coursesTech.moduleForm.order' | translate }}</mat-label>
+        <input matInput type="number" min="1" formControlName="order" [placeholder]="'coursesTech.moduleForm.orderPlaceholder' | translate">
+        <mat-error *ngIf="form.controls.order.hasError('required') || form.controls.order.hasError('min')">
+          {{ 'courseModules.form.orderRequired' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'coursesTech.moduleForm.content' | translate }}</mat-label>
+        <textarea matInput formControlName="content" rows="5" [placeholder]="'coursesTech.moduleForm.contentPlaceholder' | translate"></textarea>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-button type="button" [routerLink]="['/courses-tech', courseId]" [disabled]="saving">
+          {{ 'coursesTech.moduleForm.cancel' | translate }}
+        </button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="saving">
+          <mat-progress-spinner *ngIf="saving" mode="indeterminate" diameter="18" class="button-spinner"></mat-progress-spinner>
+          <span *ngIf="!saving">{{ (isEditMode ? 'coursesTech.moduleForm.saveChanges' : 'coursesTech.moduleForm.create') | translate }}</span>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

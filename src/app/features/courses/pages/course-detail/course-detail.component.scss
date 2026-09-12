@@ -1,0 +1,130 @@
+.hero {
+  border-radius: 16px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.55));
+  padding: 16px 24px 28px;
+  color: #fff;
+}
+
+.back-button {
+  color: #fff;
+}
+
+.hero-content h1 {
+  margin: 8px 0 8px;
+  font-weight: 700;
+}
+
+.hero-content p {
+  margin: 0 0 16px;
+  max-width: 640px;
+  opacity: 0.92;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.hero-actions button[mat-stroked-button] {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.detail-tabs {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.tab-content {
+  padding: 24px;
+  color: #5f6368;
+}
+
+.modules-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.students-tab-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.enrolled-students {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.enrolled-student-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 8px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid #f1f3f4;
+  flex-wrap: wrap;
+}
+
+.enrolled-student-row:hover {
+  background: #f8f9fa;
+}
+
+.enrolled-student-info {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.enrolled-student-name {
+  font-weight: 500;
+  color: #202124;
+}
+
+.enrolled-student-email {
+  font-size: 13px;
+  color: #5f6368;
+}
+
+.enrolled-student-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.progress-percent {
+  font-size: 12px;
+  color: #5f6368;
+}
+
+mat-chip.course-status-completed {
+  --mdc-chip-elevated-container-color: #e6f4ea;
+  color: #1e7e34;
+}
+
+mat-chip.course-status-in-progress {
+  --mdc-chip-elevated-container-color: #fef7e0;
+  color: #b06000;
+}
+
+mat-chip.course-status-not-started {
+  --mdc-chip-elevated-container-color: #f1f3f4;
+  color: #5f6368;
+}
+
+mat-chip.points-chip {
+  --mdc-chip-elevated-container-color: #f3e8fd;
+  color: #8430ce;
+}

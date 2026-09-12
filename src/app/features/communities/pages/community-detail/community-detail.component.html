@@ -1,0 +1,47 @@
+<app-loading-spinner *ngIf="loading" [message]="'communities.detail.loading' | translate"></app-loading-spinner>
+
+<ng-container *ngIf="!loading && community">
+  <div class="page-header">
+    <button mat-icon-button routerLink="/communities" [attr.aria-label]="'common.back' | translate">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>{{ community.name }}</h1>
+    <span class="spacer"></span>
+    <button mat-stroked-button [routerLink]="['/communities', community.id, 'edit']">
+      <mat-icon>edit</mat-icon>
+      {{ 'common.edit' | translate }}
+    </button>
+  </div>
+
+  <mat-card class="header-card">
+    <mat-card-content>
+      <p class="description">{{ community.description || ('common.noDescriptionProvided' | translate) }}</p>
+      <mat-chip [class.status-active]="community.status === 'ACTIVE'" [class.status-inactive]="community.status !== 'ACTIVE'">
+        {{ (community.status === 'ACTIVE' ? 'common.active' : 'common.inactive') | translate }}
+      </mat-chip>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-tab-group class="detail-tabs">
+    <mat-tab [label]="'communities.detail.overviewTab' | translate">
+      <div class="tab-content">
+        <p>{{ 'communities.detail.overviewText' | translate: { name: community.name } }}</p>
+      </div>
+    </mat-tab>
+    <mat-tab [label]="'communities.detail.usersTab' | translate">
+      <div class="tab-content">
+        <p>{{ 'communities.detail.usersText' | translate }}</p>
+      </div>
+    </mat-tab>
+    <mat-tab [label]="'communities.detail.companiesTab' | translate">
+      <div class="tab-content">
+        <p>{{ 'communities.detail.companiesText' | translate }}</p>
+      </div>
+    </mat-tab>
+    <mat-tab [label]="'communities.detail.coursesTab' | translate">
+      <div class="tab-content">
+        <p>{{ 'communities.detail.coursesText' | translate }}</p>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</ng-container>

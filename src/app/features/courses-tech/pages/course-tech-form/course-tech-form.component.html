@@ -1,0 +1,61 @@
+<div class="page-header">
+  <button mat-icon-button routerLink="/courses-tech" [attr.aria-label]="'common.back' | translate">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h1>{{ (isEditMode ? 'coursesTech.form.editTitle' : 'coursesTech.form.newTitle') | translate }}</h1>
+</div>
+
+<mat-card class="form-card">
+  <mat-card-content>
+    <div class="loading-inline" *ngIf="loading">
+      <mat-progress-spinner mode="indeterminate" diameter="32"></mat-progress-spinner>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!loading">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'coursesTech.form.community' | translate }}</mat-label>
+        <mat-select formControlName="communityId" [disabled]="communitiesLoading">
+          <mat-option *ngFor="let community of communities" [value]="community.id">{{ community.name }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls.communityId.hasError('required')">{{ 'coursesTech.form.communityRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'coursesTech.form.name' | translate }}</mat-label>
+        <input matInput formControlName="name" [placeholder]="'coursesTech.form.namePlaceholder' | translate">
+        <mat-error *ngIf="form.controls.name.hasError('required')">{{ 'coursesTech.form.nameRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'coursesTech.form.description' | translate }}</mat-label>
+        <textarea matInput formControlName="description" rows="3" [placeholder]="'coursesTech.form.descriptionPlaceholder' | translate"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'coursesTech.form.duration' | translate }}</mat-label>
+        <input matInput formControlName="duration" [placeholder]="'coursesTech.form.durationPlaceholder' | translate">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'coursesTech.form.imageUrl' | translate }}</mat-label>
+        <input matInput formControlName="imageUrl" [placeholder]="'coursesTech.form.imageUrlPlaceholder' | translate">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'coursesTech.form.status' | translate }}</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="ACTIVE">{{ 'common.active' | translate }}</mat-option>
+          <mat-option value="INACTIVE">{{ 'common.inactive' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-button type="button" routerLink="/courses-tech" [disabled]="saving">{{ 'coursesTech.form.cancel' | translate }}</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="saving">
+          <mat-progress-spinner *ngIf="saving" mode="indeterminate" diameter="18" class="button-spinner"></mat-progress-spinner>
+          <span *ngIf="!saving">{{ (isEditMode ? 'coursesTech.form.saveChanges' : 'coursesTech.form.create') | translate }}</span>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,60 @@
+<div class="page-header">
+  <div>
+    <h1>{{ 'coursesTech.list.title' | translate }}</h1>
+    <p class="page-subtitle">{{ 'coursesTech.list.subtitle' | translate }}</p>
+  </div>
+</div>
+
+<mat-form-field appearance="outline" class="search-field">
+  <mat-label>{{ 'coursesTech.list.searchLabel' | translate }}</mat-label>
+  <input matInput [formControl]="searchControl" [placeholder]="'coursesTech.list.searchPlaceholder' | translate">
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+
+<app-loading-spinner *ngIf="loading" [message]="'coursesTech.list.loading' | translate"></app-loading-spinner>
+
+<ng-container *ngIf="!loading">
+  <app-empty-state
+    *ngIf="!courses.length"
+    icon="computer"
+    [title]="'coursesTech.list.emptyTitle' | translate"
+    [subtitle]="'coursesTech.list.emptySubtitle' | translate"
+  ></app-empty-state>
+
+  <div class="course-grid" *ngIf="courses.length">
+    <mat-card class="course-card" *ngFor="let course of courses" [routerLink]="['/courses-tech', course.id]">
+      <div class="course-image">
+        <img *ngIf="course.imageUrl" [src]="course.imageUrl" [alt]="course.name" (error)="$event.target.style.display='none'">
+        <mat-icon *ngIf="!course.imageUrl">computer</mat-icon>
+      </div>
+      <mat-card-content>
+        <div class="course-title-row">
+          <h3>{{ course.name }}</h3>
+          <mat-chip [class.status-active]="course.status === 'ACTIVE'" [class.status-inactive]="course.status !== 'ACTIVE'">
+            {{ (course.status === 'ACTIVE' ? 'common.active' : 'common.inactive') | translate }}
+          </mat-chip>
+        </div>
+        <p class="course-description">{{ course.description || ('common.noDescriptionProvided' | translate) }}</p>
+        <div class="course-meta">
+          <span *ngIf="course.duration"><mat-icon inline>schedule</mat-icon> {{ course.duration }}</span>
+          <span><mat-icon inline>group</mat-icon> {{ 'coursesTech.list.studentsCount' | translate: { count: course.studentsCount ?? 0 } }}</span>
+        </div>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-icon-button [matMenuTriggerFor]="rowMenu" (click)="$event.stopPropagation()">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #rowMenu="matMenu">
+          <a mat-menu-item [routerLink]="['/courses-tech', course.id, 'edit']">
+            <mat-icon>edit</mat-icon>
+            <span>{{ 'common.edit' | translate }}</span>
+          </a>
+          <button mat-menu-item (click)="confirmDelete(course, $event)">
+            <mat-icon color="warn">delete</mat-icon>
+            <span>{{ 'common.delete' | translate }}</span>
+          </button>
+        </mat-menu>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</ng-container>

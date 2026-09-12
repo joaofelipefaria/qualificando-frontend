@@ -1,0 +1,69 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+<ng-container *ngIf="!loading && course">
+  <div class="page-header">
+    <button mat-icon-button [routerLink]="['/courses-tech']" [attr.aria-label]="'coursesTech.detail.backToList' | translate">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="header-text">
+      <h1>{{ course.name }}</h1>
+      <p *ngIf="course.description">{{ course.description }}</p>
+    </div>
+  </div>
+
+  <section class="section-card">
+    <div class="section-header">
+      <h2>{{ 'coursesTech.detail.modules' | translate }}</h2>
+      <button *ngIf="auth.isAdmin()" mat-flat-button color="primary" [routerLink]="['/courses-tech', course.id, 'modules', 'new']">
+        <mat-icon>add</mat-icon>
+        {{ 'coursesTech.detail.newModule' | translate }}
+      </button>
+    </div>
+
+    <app-loading-spinner *ngIf="modulesLoading" [message]="'courseModules.list.loading' | translate"></app-loading-spinner>
+
+    <app-empty-state
+      *ngIf="!modulesLoading && !modules.length"
+      icon="view_module"
+      [title]="'coursesTech.detail.noModules' | translate"
+    ></app-empty-state>
+
+    <mat-nav-list *ngIf="!modulesLoading && modules.length">
+      <a mat-list-item *ngFor="let module of modules" [routerLink]="['/courses-tech', course.id, 'modules', module.id]">
+        <mat-icon matListItemIcon>{{ module.modality === 'PRESENCIAL' ? 'groups' : 'laptop' }}</mat-icon>
+        <span matListItemTitle>{{ module.order }}. {{ module.title }}</span>
+        <span matListItemLine>{{ (module.modality === 'ONLINE' ? 'courseModules.modality.online' : 'courseModules.modality.presencial') | translate }}</span>
+        <mat-chip matListItemMeta class="points-chip">
+          <mat-icon inline>military_tech</mat-icon>
+          {{ 'courseModules.detail.pointsChip' | translate: { points: module.points || 0 } }}
+        </mat-chip>
+      </a>
+    </mat-nav-list>
+  </section>
+
+  <section class="section-card">
+    <div class="section-header">
+      <h2>{{ 'coursesTech.detail.enrolledStudents' | translate }}</h2>
+      <button *ngIf="auth.isAdmin() || auth.isEmpresario()" mat-stroked-button color="primary" [routerLink]="['/courses-tech', course.id, 'enroll']">
+        <mat-icon>how_to_reg</mat-icon>
+        {{ 'coursesTech.detail.enrollStudent' | translate }}
+      </button>
+    </div>
+
+    <app-empty-state
+      *ngIf="!students.length"
+      icon="group"
+      [title]="'coursesTech.detail.noStudents' | translate"
+    ></app-empty-state>
+
+    <div class="enrolled-students" *ngIf="students.length">
+      <a class="enrolled-student-row" *ngFor="let student of students" [routerLink]="['/talentos', student.id]">
+        <app-student-avatar [name]="student.fullName || '?'" [photoUrl]="student.photoUrl" [seed]="student.id" [size]="44"></app-student-avatar>
+        <div class="enrolled-student-info">
+          <div class="enrolled-student-name">{{ student.fullName || ('common.dash' | translate) }}</div>
+          <div class="enrolled-student-email">{{ student.email }}</div>
+        </div>
+      </a>
+    </div>
+  </section>
+</ng-container>

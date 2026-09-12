@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parceiro Silver 05</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #14243a;
+    --ink-soft: #2c3e56;
+    --paper: #f6f3ec;
+    --paper-raised: #ffffff;
+    --line: #ded6c4;
+    --copper: #d6dbdf;
+    --copper-ink: #4a5a66;
+    --slate: #5c6b7a;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 500; margin: 0; color: var(--ink); }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  .eyebrow {
+    display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--copper-ink); margin-bottom: 14px;
+  }
+
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(246, 243, 236, 0.92); backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; max-width: 1080px; margin: 0 auto; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-mark {
+    width: 38px; height: 38px; border-radius: 8px; background: var(--ink);
+    color: var(--paper); display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-size: 15px; font-weight: 600; flex-shrink: 0;
+  }
+  .brand-name { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; }
+  .tier-chip {
+    display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 2px 8px; border-radius: 20px; margin-left: 8px;
+    background: var(--copper); color: var(--copper-ink); vertical-align: middle;
+    position: relative; top: -1px;
+  }
+  nav.links { display: flex; align-items: center; gap: 36px; }
+  nav.links a { font-size: 14px; font-weight: 500; color: var(--ink-soft); }
+  nav.links a:hover { color: var(--copper-ink); }
+  .nav-cta {
+    padding: 9px 18px; background: var(--ink); color: var(--paper) !important;
+    border-radius: 6px; font-size: 14px; font-weight: 500;
+  }
+  .nav-cta:hover { background: var(--ink-soft); }
+  .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .menu-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); margin: 5px 0; }
+
+  section { padding: 96px 0; }
+  .hero { padding: 88px 0 96px; position: relative; overflow: hidden; }
+  .hero .wrap { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; }
+  .hero h1 { font-size: 46px; line-height: 1.12; letter-spacing: -0.01em; }
+  .hero .tagline { margin-top: 20px; font-size: 17px; color: var(--slate); max-width: 480px; }
+  .hero .cta-row { margin-top: 34px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 13px 24px; background: var(--ink); color: var(--paper); border-radius: 6px;
+    font-size: 14px; font-weight: 500; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--ink-soft); }
+  .btn-ghost {
+    padding: 13px 24px; border: 1px solid var(--line); border-radius: 6px;
+    font-size: 14px; font-weight: 500; display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--copper); color: var(--copper-ink); }
+
+  .node-art { width: 100%; height: auto; }
+  .node-art circle { fill: var(--paper-raised); stroke: var(--copper); stroke-width: 1.4; }
+  .node-art circle.solid { fill: var(--copper); stroke: none; }
+  .node-art line { stroke: var(--line); stroke-width: 1.4; }
+
+  .divider { border: none; border-top: 1px solid var(--line); margin: 0; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+  .service-card {
+    background: var(--paper-raised); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 30px 26px;
+  }
+  .service-card .num { font-family: 'Fraunces', serif; font-size: 13px; color: var(--copper-ink); margin-bottom: 16px; }
+  .service-card h3 { font-size: 18px; margin-bottom: 10px; }
+  .service-card p { font-size: 14.5px; color: var(--slate); margin: 0; }
+
+  .sobre .wrap { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: start; }
+  .sobre p { font-size: 16px; color: var(--ink-soft); max-width: 540px; }
+  .facts { background: var(--paper-raised); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
+  .facts .fact { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .facts .fact:last-child { border-bottom: none; }
+  .facts .fact-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--slate); }
+  .facts .fact-value { font-family: 'Fraunces', serif; font-size: 19px; margin-top: 4px; }
+
+  .contato { background: var(--ink); color: var(--paper); }
+  .contato .eyebrow { color: #d6dbdf; }
+  .contato h2 { color: var(--paper); font-size: 32px; }
+  .contato .wrap { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; }
+  .contato .info p { color: #c7cfda; font-size: 15px; max-width: 380px; }
+  .contact-line { display: flex; gap: 12px; margin-top: 22px; font-size: 14.5px; }
+  .contact-line .k { color: #8b98a8; min-width: 84px; }
+  .form-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.14); border-radius: var(--radius); padding: 28px; }
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 12.5px; color: #b7c0cc; margin-bottom: 6px; }
+  .field input, .field textarea {
+    width: 100%; padding: 11px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.05); color: var(--paper); font-family: inherit; font-size: 14px;
+  }
+  .field textarea { resize: vertical; min-height: 84px; }
+  .field input::placeholder, .field textarea::placeholder { color: #7c8a99; }
+  .form-submit {
+    width: 100%; padding: 13px; background: #d6dbdf; color: var(--copper-ink);
+    border: none; border-radius: 6px; font-weight: 600; font-size: 14px; cursor: pointer; font-family: inherit;
+  }
+  .form-note { font-size: 12px; color: #8b98a8; margin-top: 10px; }
+
+  footer { padding: 32px 0; }
+  footer .wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  footer .foot-brand { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--slate); }
+  footer .back-link { font-size: 13px; color: var(--slate); border-bottom: 1px dotted var(--line); }
+  footer .back-link:hover { color: var(--copper-ink); }
+
+  @media (max-width: 860px) {
+    .hero .wrap { grid-template-columns: 1fr; }
+    .hero .art { order: -1; max-width: 280px; margin: 0 auto; }
+    .services-grid { grid-template-columns: 1fr; }
+    .sobre .wrap { grid-template-columns: 1fr; }
+    .contato .wrap { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    nav.links { position: fixed; top: 70px; left: 0; right: 0; background: var(--paper);
+      border-bottom: 1px solid var(--line); flex-direction: column; align-items: flex-start;
+      gap: 0; padding: 8px 32px 18px; transform: translateY(-8px); opacity: 0; pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s ease; }
+    nav.links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    nav.links a { width: 100%; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    nav.links a.nav-cta { border-bottom: none; text-align: center; margin-top: 8px; }
+    .menu-toggle { display: block; }
+    .hero h1 { font-size: 34px; }
+    section { padding: 64px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-mark">PS</div>
+      <span class="brand-name">Parceiro Silver 05<span class="tier-chip">Silver</span></span>
+    </div>
+    <nav class="links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato" class="nav-cta">Contato</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Parceiro Silver · Programa Qualificando</span>
+      <h1>Parceiro Silver 05</h1>
+      <p class="tagline">Apoiadora do Qualificando no fortalecimento da rede de desenvolvimento profissional.</p>
+      <div class="cta-row">
+        <a href="#contato" class="btn-primary">Fale conosco</a>
+        <a href="#sobre" class="btn-ghost">Conhecer o parceiro</a>
+      </div>
+    </div>
+    <div class="art">
+      <svg class="node-art" viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <line x1="60" y1="70" x2="160" y2="130"/>
+        <line x1="160" y1="130" x2="250" y2="60"/>
+        <line x1="160" y1="130" x2="90" y2="200"/>
+        <line x1="160" y1="130" x2="230" y2="200"/>
+        <line x1="60" y1="70" x2="90" y2="200"/>
+        <line x1="250" y1="60" x2="230" y2="200"/>
+        <circle class="solid" cx="160" cy="130" r="14"/>
+        <circle cx="60" cy="70" r="9"/>
+        <circle cx="250" cy="60" r="9"/>
+        <circle cx="90" cy="200" r="9"/>
+        <circle cx="230" cy="200" r="9"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="servicos" id="servicos">
+  <div class="wrap">
+    <span class="eyebrow">O que oferecemos</span>
+    <h2>Serviços e frentes de atuação</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="num">01</div>
+        <h3>Formação e empregabilidade</h3>
+        <p>Apoio direto aos talentos formados pelo Qualificando, com foco em preparação prática e conexão com o mercado de trabalho.</p>
+      </div>
+      <div class="service-card">
+        <div class="num">02</div>
+        <h3>Conexão com oportunidades</h3>
+        <p>Intermediação entre comunidades, cursos e vagas reais, ampliando o alcance do programa dentro da rede de Parceiro Silver 05.</p>
+      </div>
+      <div class="service-card">
+        <div class="num">03</div>
+        <h3>Compromisso social</h3>
+        <p>Investimento contínuo em iniciativas de desenvolvimento profissional e impacto social nas comunidades atendidas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="sobre" id="sobre">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Sobre o parceiro</span>
+      <h2>Parceiro Silver 05</h2>
+      <p>Parceiro Silver 05 apoia o Qualificando como parceira silver, colaborando com a divulgação e o fortalecimento da rede que conecta talentos, comunidades e oportunidades de desenvolvimento profissional.</p>
+    </div>
+    <div class="facts">
+      <div class="fact">
+        <div class="fact-label">Categoria de parceria</div>
+        <div class="fact-value">Silver</div>
+      </div>
+      <div class="fact">
+        <div class="fact-label">Programa</div>
+        <div class="fact-value">Qualificando</div>
+      </div>
+      <div class="fact">
+        <div class="fact-label">Atuação</div>
+        <div class="fact-value">Desenvolvimento de talentos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contato" id="contato">
+  <div class="wrap">
+    <div class="info">
+      <span class="eyebrow">Fale com Parceiro Silver 05</span>
+      <h2>Vamos conversar</h2>
+      <p>Preencha o formulário ao lado ou utilize um dos canais abaixo para falar diretamente com nossa equipe.</p>
+      <div class="contact-line"><span class="k">E-mail</span><span>contato@parceiro-silver-05.com.br</span></div>
+      <div class="contact-line"><span class="k">Telefone</span><span>(00) 0000-0000</span></div>
+      <div class="contact-line"><span class="k">Endereço</span><span>A definir</span></div>
+    </div>
+    <div class="form-card">
+      <div class="field">
+        <label for="f-name">Nome</label>
+        <input id="f-name" type="text" placeholder="Seu nome completo">
+      </div>
+      <div class="field">
+        <label for="f-email">E-mail</label>
+        <input id="f-email" type="email" placeholder="voce@exemplo.com.br">
+      </div>
+      <div class="field">
+        <label for="f-msg">Mensagem</label>
+        <textarea id="f-msg" placeholder="Como podemos ajudar?"></textarea>
+      </div>
+      <button class="form-submit" type="button" onclick="alert('Este é um site de demonstração. Nenhuma mensagem foi enviada.')">Enviar mensagem</button>
+      <p class="form-note">Site institucional de demonstração do parceiro Parceiro Silver 05.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-brand">
+      <div class="brand-mark" style="width:28px;height:28px;font-size:11px;">PS</div>
+      Parceiro Silver 05 · Parceiro Silver
+    </div>
+    <a class="back-link" href="../../index.html" target="_blank" rel="noopener">&larr; Voltar para o Qualificando</a>
+  </div>
+</footer>
+
+<script>
+  var toggle = document.getElementById('menuToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function () {
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>

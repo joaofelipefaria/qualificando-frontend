@@ -1,0 +1,73 @@
+<div class="page-header">
+  <button mat-icon-button routerLink="/admin" [attr.aria-label]="'common.back' | translate">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h1>{{ (isEditMode ? 'admin.users.editTitle' : 'admin.users.newTitle') | translate }}</h1>
+</div>
+
+<mat-card class="form-card">
+  <mat-card-content>
+    <div class="loading-inline" *ngIf="loading">
+      <mat-progress-spinner mode="indeterminate" diameter="32"></mat-progress-spinner>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!loading">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'admin.users.fullName' | translate }}</mat-label>
+        <input matInput formControlName="fullName" [placeholder]="'admin.users.fullNamePlaceholder' | translate">
+        <mat-error *ngIf="form.controls.fullName.hasError('required')">{{ 'admin.users.fullNameRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'admin.users.email' | translate }}</mat-label>
+        <input matInput type="email" formControlName="email" [placeholder]="'admin.users.emailPlaceholder' | translate">
+        <mat-error *ngIf="form.controls.email.hasError('required')">{{ 'admin.users.emailRequired' | translate }}</mat-error>
+        <mat-error *ngIf="form.controls.email.hasError('email')">{{ 'admin.users.emailInvalid' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'admin.users.role' | translate }}</mat-label>
+        <mat-select formControlName="role" [placeholder]="'admin.users.rolePlaceholder' | translate">
+          <mat-option *ngFor="let role of roles" [value]="role">{{ roleLabel(role) }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls.role.hasError('required')">{{ 'admin.users.roleRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width" *ngIf="communityApplies">
+        <mat-label>{{ 'admin.users.community' | translate }}</mat-label>
+        <mat-select formControlName="communityId" [disabled]="communitiesLoading" [placeholder]="'admin.users.communityPlaceholder' | translate">
+          <mat-option *ngFor="let community of communities" [value]="community.id">{{ community.name }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls.communityId.hasError('required')">{{ 'admin.users.communityRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <p class="group-label" *ngIf="!communityApplies">{{ 'admin.users.communityAdminHint' | translate }}</p>
+
+      <mat-form-field appearance="outline" class="full-width" *ngIf="companyApplies">
+        <mat-label>{{ 'admin.users.company' | translate }}</mat-label>
+        <mat-select formControlName="companyId" [disabled]="companiesLoading" [placeholder]="'admin.users.companyPlaceholder' | translate">
+          <mat-option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls.companyId.hasError('required')">{{ 'admin.users.companyRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'admin.users.phone' | translate }}</mat-label>
+        <input matInput formControlName="phone" [placeholder]="'admin.users.phonePlaceholder' | translate">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'admin.users.address' | translate }}</mat-label>
+        <input matInput formControlName="address" [placeholder]="'admin.users.addressPlaceholder' | translate">
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-button type="button" routerLink="/admin" [disabled]="saving">{{ 'students.form.cancel' | translate }}</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="saving">
+          <mat-progress-spinner *ngIf="saving" mode="indeterminate" diameter="18" class="button-spinner"></mat-progress-spinner>
+          <span *ngIf="!saving">{{ (isEditMode ? 'admin.users.saveChanges' : 'admin.users.create') | translate }}</span>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,123 @@
+<app-loading-spinner *ngIf="loading" [message]="'courseModules.content.loading' | translate"></app-loading-spinner>
+
+<ng-container *ngIf="!loading && module">
+  <div class="page-header">
+    <button mat-icon-button [routerLink]="['/courses-tech', courseId, 'modules', moduleId]" [attr.aria-label]="'common.back' | translate">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="page-header-titles">
+      <h1>{{ 'courseModules.content.title' | translate }}</h1>
+      <p class="page-subtitle">{{ module.title }}</p>
+    </div>
+    <button mat-flat-button color="primary" class="save-order-button" [disabled]="!orderDirty || savingOrder" (click)="saveOrder()">
+      <mat-progress-spinner *ngIf="savingOrder" mode="indeterminate" diameter="18" class="button-spinner"></mat-progress-spinner>
+      <ng-container *ngIf="!savingOrder">
+        <mat-icon>save</mat-icon>
+        {{ 'courseModules.content.save' | translate }}
+      </ng-container>
+    </button>
+  </div>
+
+  <div class="content-layout">
+    <mat-card class="section-card">
+      <mat-card-content>
+        <h2>{{ 'courseModules.content.currentBlocksTitle' | translate }}</h2>
+        <p class="reorder-hint" *ngIf="blocks.length">{{ 'courseModules.content.reorderHint' | translate }}</p>
+
+        <app-empty-state
+          *ngIf="!blocks.length"
+          icon="article"
+          [title]="'courseModules.detail.emptyContentTitle' | translate"
+          [subtitle]="'courseModules.detail.emptyContentSubtitle' | translate"
+        ></app-empty-state>
+
+        <div class="block-list" cdkDropList (cdkDropListDropped)="onDrop($event)">
+          <div class="block-row" cdkDrag [cdkDragDisabled]="blocks.length < 2" *ngFor="let block of blocks; let first = first; let last = last">
+            <mat-icon
+              class="drag-handle"
+              cdkDragHandle
+              [class.drag-handle--disabled]="blocks.length < 2"
+              [attr.aria-label]="'courseModules.content.dragHandle' | translate">
+              drag_indicator
+            </mat-icon>
+
+            <div class="block-order">
+              <button mat-icon-button [disabled]="first" (click)="moveBlock(block, -1)" [attr.aria-label]="'courseModules.content.moveUp' | translate">
+                <mat-icon>keyboard_arrow_up</mat-icon>
+              </button>
+              <button mat-icon-button [disabled]="last" (click)="moveBlock(block, 1)" [attr.aria-label]="'courseModules.content.moveDown' | translate">
+                <mat-icon>keyboard_arrow_down</mat-icon>
+              </button>
+            </div>
+
+            <div class="block-summary">
+              <ng-container *ngIf="textOf(block) as text">
+                <mat-icon inline>notes</mat-icon>
+                <span class="block-label">{{ text.title || ('courseModules.content.untitledText' | translate) }}</span>
+              </ng-container>
+              <ng-container *ngIf="mediaOf(block) as mediaBlock">
+                <mat-icon inline>perm_media</mat-icon>
+                <span class="block-label">{{ mediaById[mediaBlock.mediaId]?.name || ('courseModules.content.unknownMedia' | translate) }}</span>
+              </ng-container>
+            </div>
+
+            <button mat-icon-button (click)="deleteBlock(block)" [attr.aria-label]="'common.delete' | translate">
+              <mat-icon color="warn">delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-tab-group class="section-card">
+      <mat-tab [label]="'courseModules.content.addTextTab' | translate">
+        <form [formGroup]="textForm" (ngSubmit)="addText()" class="tab-form">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'courseModules.content.textTitle' | translate }}</mat-label>
+            <input matInput formControlName="title">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'courseModules.content.textBody' | translate }}</mat-label>
+            <textarea matInput formControlName="body" rows="5" [placeholder]="'courseModules.content.textBodyPlaceholder' | translate"></textarea>
+            <mat-error *ngIf="textForm.controls.body.hasError('required')">{{ 'courseModules.content.textBodyRequired' | translate }}</mat-error>
+          </mat-form-field>
+          <div class="form-actions">
+            <button mat-flat-button color="primary" type="submit" [disabled]="savingText">
+              <mat-progress-spinner *ngIf="savingText" mode="indeterminate" diameter="18" class="button-spinner"></mat-progress-spinner>
+              <span *ngIf="!savingText">{{ 'courseModules.content.addTextButton' | translate }}</span>
+            </button>
+          </div>
+        </form>
+      </mat-tab>
+
+      <mat-tab [label]="'courseModules.content.addMediaTab' | translate">
+        <div class="tab-form">
+          <p class="upload-hint">{{ 'courseModules.content.uploadHint' | translate }}</p>
+          <input type="file" (change)="onFileSelected($event)" [disabled]="uploading" accept="image/*,video/*,application/pdf,.doc,.docx">
+          <mat-progress-spinner *ngIf="uploading" mode="indeterminate" diameter="24" class="upload-spinner"></mat-progress-spinner>
+
+          <form [formGroup]="mediaForm" (ngSubmit)="addMedia()">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>{{ 'courseModules.content.mediaSelect' | translate }}</mat-label>
+              <mat-select formControlName="mediaId">
+                <mat-option *ngFor="let asset of media" [value]="asset.id">{{ asset.name }}</mat-option>
+              </mat-select>
+              <mat-hint *ngIf="!media.length">{{ 'courseModules.content.noMediaHint' | translate }}</mat-hint>
+              <mat-error *ngIf="mediaForm.controls.mediaId.hasError('required')">{{ 'courseModules.content.mediaSelectRequired' | translate }}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>{{ 'courseModules.content.mediaCaption' | translate }}</mat-label>
+              <input matInput formControlName="caption">
+            </mat-form-field>
+            <div class="form-actions">
+              <button mat-flat-button color="primary" type="submit" [disabled]="savingMedia">
+                <mat-progress-spinner *ngIf="savingMedia" mode="indeterminate" diameter="18" class="button-spinner"></mat-progress-spinner>
+                <span *ngIf="!savingMedia">{{ 'courseModules.content.addMediaButton' | translate }}</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</ng-container>

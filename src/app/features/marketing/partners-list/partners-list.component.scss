@@ -1,0 +1,130 @@
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.page-subtitle {
+  margin: 4px 0 0;
+  color: #5f6368;
+}
+
+.tier-section {
+  margin-bottom: 32px;
+}
+
+.tier-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 16px;
+  color: #3c4043;
+}
+
+.partners-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.partners-grid--platinum {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.partners-grid--gold {
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+}
+
+.partners-grid--silver {
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+}
+
+.partner-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.partner-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+  transform: translateY(-2px);
+}
+
+.partner-card.no-link {
+  cursor: default;
+}
+
+.partner-card.no-link:hover {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  transform: none;
+}
+
+.partner-logo {
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.partner-logo-fallback {
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.partner-card--platinum .partner-logo,
+.partner-card--platinum .partner-logo-fallback {
+  width: 72px;
+  height: 72px;
+  font-size: 22px;
+}
+
+.partner-card--platinum .partner-name {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.partner-description {
+  margin: 0;
+  font-size: 12px;
+  color: #5f6368;
+}
+
+.partner-card--gold .partner-logo,
+.partner-card--gold .partner-logo-fallback {
+  width: 48px;
+  height: 48px;
+  font-size: 16px;
+}
+
+.partner-card--gold .partner-name {
+  font-size: 13px;
+}
+
+.partner-card--silver {
+  padding: 10px 8px;
+}
+
+.partner-card--silver .partner-logo,
+.partner-card--silver .partner-logo-fallback {
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+}
+
+.partner-card--silver .partner-name {
+  font-size: 11px;
+  color: #5f6368;
+}

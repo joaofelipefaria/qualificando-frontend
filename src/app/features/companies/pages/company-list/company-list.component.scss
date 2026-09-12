@@ -1,0 +1,67 @@
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.page-header h1 { margin: 0; font-weight: 600; }
+.page-subtitle { margin: 4px 0 0; color: #5f6368; }
+
+.search-field {
+  width: 100%;
+  max-width: 360px;
+  margin-bottom: 16px;
+}
+
+.company-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.company-card {
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.company-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.logo-wrapper {
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f6fa;
+  border-radius: 16px 16px 0 0;
+}
+
+.logo-wrapper img {
+  max-height: 64px;
+  max-width: 80%;
+  object-fit: contain;
+}
+
+.logo-wrapper mat-icon {
+  font-size: 36px;
+  width: 36px;
+  height: 36px;
+  color: #9aa0a6;
+}
+
+.company-card h3 {
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+.company-description {
+  color: #5f6368;
+  font-size: 14px;
+  min-height: 40px;
+}

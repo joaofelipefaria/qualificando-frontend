@@ -1,0 +1,72 @@
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.header-text h1 { margin: 0; font-weight: 600; }
+.header-text p { margin: 6px 0 0; color: #5f6368; }
+
+.section-card {
+  border-radius: 16px;
+  background: #fff;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.enrolled-students {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.enrolled-student-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 8px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid #f1f3f4;
+  flex-wrap: wrap;
+}
+
+.enrolled-student-row:hover {
+  background: #f8f9fa;
+}
+
+.enrolled-student-info {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.enrolled-student-name {
+  font-weight: 500;
+  color: #202124;
+}
+
+.enrolled-student-email {
+  font-size: 13px;
+  color: #5f6368;
+}
+
+mat-chip.points-chip {
+  --mdc-chip-elevated-container-color: #f3e8fd;
+  color: #8430ce;
+}

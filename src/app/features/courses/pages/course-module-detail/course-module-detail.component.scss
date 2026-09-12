@@ -1,0 +1,133 @@
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.header-text h1 { margin: 0; font-weight: 600; }
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.module-description {
+  color: #5f6368;
+  margin: 6px 0 0;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.section-card {
+  border-radius: 16px;
+  margin-bottom: 16px;
+}
+
+.section-card h2 {
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+
+.section-card h3 {
+  margin: 16px 0 8px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.company-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #5f6368;
+  margin: 0;
+}
+
+.agenda-row {
+  display: flex;
+  align-items: center;
+}
+
+.session-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.session-form .full-width { grid-column: 1 / -1; }
+
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.content-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.content-block {
+  border-top: 1px solid #e8eaed;
+  padding-top: 16px;
+}
+
+.content-block:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.block-body {
+  color: #3c4043;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.media-image, .media-video {
+  max-width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+
+.media-document {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #f1f3f4;
+  color: #1a73e8;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.media-caption {
+  color: #5f6368;
+  font-size: 13px;
+  margin: 6px 0 0;
+}
+
+mat-chip.status-active {
+  --mdc-chip-elevated-container-color: #e6f4ea;
+  color: #1e7e34;
+}
+
+mat-chip.status-inactive {
+  --mdc-chip-elevated-container-color: #fce8e6;
+  color: #c5221f;
+}
+
+mat-chip.points-chip {
+  --mdc-chip-elevated-container-color: #f3e8fd;
+  color: #8430ce;
+}

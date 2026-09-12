@@ -1,0 +1,84 @@
+<div class="page-header">
+  <button mat-icon-button [routerLink]="['/courses', courseId]" [attr.aria-label]="'common.back' | translate">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h1>{{ (isEditMode ? 'courseModules.form.editTitle' : 'courseModules.form.newTitle') | translate }}</h1>
+</div>
+
+<mat-card class="form-card">
+  <mat-card-content>
+    <div class="loading-inline" *ngIf="loading">
+      <mat-progress-spinner mode="indeterminate" diameter="32"></mat-progress-spinner>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!loading">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'courseModules.form.title' | translate }}</mat-label>
+        <input matInput formControlName="title" [placeholder]="'courseModules.form.titlePlaceholder' | translate">
+        <mat-error *ngIf="form.controls.title.hasError('required')">{{ 'courseModules.form.titleRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'courseModules.form.description' | translate }}</mat-label>
+        <textarea matInput formControlName="description" rows="3"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'courseModules.form.order' | translate }}</mat-label>
+        <input matInput type="number" min="1" formControlName="order">
+        <mat-error *ngIf="form.controls.order.hasError('required') || form.controls.order.hasError('min')">
+          {{ 'courseModules.form.orderRequired' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'courseModules.form.modality' | translate }}</mat-label>
+        <mat-select formControlName="modality">
+          <mat-option value="ONLINE">{{ 'courseModules.modality.online' | translate }}</mat-option>
+          <mat-option value="PRESENCIAL">{{ 'courseModules.modality.presencial' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'courseModules.form.status' | translate }}</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="ACTIVE">{{ 'common.active' | translate }}</mat-option>
+          <mat-option value="INACTIVE">{{ 'common.inactive' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'courseModules.form.points' | translate }}</mat-label>
+        <input matInput type="number" min="0" formControlName="points">
+        <mat-hint>{{ 'courseModules.form.pointsHint' | translate }}</mat-hint>
+        <mat-error *ngIf="form.controls.points.hasError('required') || form.controls.points.hasError('min')">
+          {{ 'courseModules.form.pointsRequired' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <ng-container *ngIf="isPresencial">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'courseModules.form.presencialCompany' | translate }}</mat-label>
+          <mat-select formControlName="presencialCompanyId">
+            <mat-option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</mat-option>
+          </mat-select>
+          <mat-hint *ngIf="!companies.length">{{ 'courseModules.form.noCompaniesHint' | translate }}</mat-hint>
+          <mat-error *ngIf="form.controls.presencialCompanyId.hasError('required')">
+            {{ 'courseModules.form.presencialCompanyRequired' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <p class="agenda-hint">{{ 'courseModules.form.agendaHint' | translate }}</p>
+      </ng-container>
+
+      <div class="form-actions">
+        <button mat-button type="button" [routerLink]="['/courses', courseId]" [disabled]="saving">
+          {{ 'courseModules.form.cancel' | translate }}
+        </button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="saving">
+          <mat-progress-spinner *ngIf="saving" mode="indeterminate" diameter="18" class="button-spinner"></mat-progress-spinner>
+          <span *ngIf="!saving">{{ (isEditMode ? 'courseModules.form.saveChanges' : 'courseModules.form.create') | translate }}</span>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

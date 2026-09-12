@@ -1,0 +1,52 @@
+<app-loading-spinner *ngIf="loading" [message]="'courseModules.detail.loading' | translate"></app-loading-spinner>
+
+<ng-container *ngIf="!loading && module">
+  <div class="page-header">
+    <button mat-icon-button [routerLink]="['/courses-tech', courseId]" [attr.aria-label]="'coursesTech.moduleDetail.backToCourse' | translate">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="header-text">
+      <h1>{{ module.title }}</h1>
+      <mat-chip [class.status-active]="module.status === 'ACTIVE'" [class.status-inactive]="module.status !== 'ACTIVE'">
+        {{ (module.status === 'ACTIVE' ? 'common.active' : 'common.inactive') | translate }}
+      </mat-chip>
+    </div>
+    <button *ngIf="auth.isAdmin()" mat-stroked-button [routerLink]="['/courses-tech', courseId, 'modules', moduleId, 'edit']">
+      <mat-icon>edit</mat-icon>
+      {{ 'coursesTech.moduleDetail.edit' | translate }}
+    </button>
+  </div>
+
+  <mat-card class="section-card">
+    <mat-card-content>
+      <h2>{{ 'coursesTech.moduleDetail.content' | translate }}</h2>
+
+      <app-empty-state
+        *ngIf="!blocks.length"
+        icon="article"
+        [title]="'coursesTech.moduleDetail.noContent' | translate"
+      ></app-empty-state>
+
+      <div class="content-blocks" *ngIf="blocks.length">
+        <div class="content-block" *ngFor="let block of blocks">
+          <ng-container *ngIf="textOf(block) as text">
+            <h3 *ngIf="text.title">{{ text.title }}</h3>
+            <p class="block-body">{{ text.body }}</p>
+          </ng-container>
+
+          <ng-container *ngIf="mediaOf(block) as mediaBlock">
+            <ng-container *ngIf="mediaFor(mediaBlock) as asset">
+              <img *ngIf="asset.type === 'IMAGE'" [src]="asset.url" [alt]="asset.name" class="media-image">
+              <video *ngIf="asset.type === 'VIDEO'" [src]="asset.url" controls class="media-video"></video>
+              <a *ngIf="asset.type === 'DOCUMENT'" [href]="asset.url" target="_blank" rel="noopener" class="media-document">
+                <mat-icon>description</mat-icon>
+                <span>{{ asset.name }}</span>
+              </a>
+              <p class="media-caption" *ngIf="mediaBlock.caption">{{ mediaBlock.caption }}</p>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

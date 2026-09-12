@@ -1,0 +1,17 @@
+<div class="partners-top-bar" *ngIf="platinumPartners.length">
+  <a
+    *ngFor="let partner of platinumPartners"
+    class="partner-top-item"
+    [href]="siteUrl(partner)"
+    target="_blank"
+    rel="noopener noreferrer"
+    [attr.aria-label]="partner.name">
+    <img *ngIf="partner.logoUrl" [src]="partner.logoUrl" [alt]="partner.name" class="partner-top-logo">
+    <span *ngIf="!partner.logoUrl" class="partner-top-logo-fallback">{{ initials(partner.name) }}</span>
+
+    <span class="partner-top-tooltip" *ngIf="partner.description">
+      <strong>{{ partner.name }}</strong>
+      <span>{{ partner.description }}</span>
+    </span>
+  </a>
+</div>

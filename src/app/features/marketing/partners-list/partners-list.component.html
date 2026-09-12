@@ -1,0 +1,54 @@
+<div class="page-header">
+  <h1>{{ 'marketing.partnersList.title' | translate }}</h1>
+  <p class="page-subtitle">{{ 'marketing.partnersList.subtitle' | translate }}</p>
+</div>
+
+<section class="tier-section" *ngIf="platinumPartners.length">
+  <h2 class="tier-title">{{ 'marketing.partnersList.platinumTitle' | translate }}</h2>
+  <div class="partners-grid partners-grid--platinum">
+    <a
+      *ngFor="let partner of platinumPartners"
+      class="partner-card partner-card--platinum"
+      [href]="siteUrl(partner)"
+      target="_blank"
+      rel="noopener noreferrer">
+      <img *ngIf="partner.logoUrl" [src]="partner.logoUrl" [alt]="partner.name" class="partner-logo partner-logo--platinum">
+      <div *ngIf="!partner.logoUrl" class="partner-logo-fallback partner-logo-fallback--platinum">{{ initials(partner.name) }}</div>
+      <span class="partner-name">{{ partner.name }}</span>
+      <p *ngIf="partner.description" class="partner-description">{{ partner.description }}</p>
+    </a>
+  </div>
+</section>
+
+<section class="tier-section" *ngIf="goldPartners.length">
+  <h2 class="tier-title">{{ 'marketing.partnersList.goldTitle' | translate }}</h2>
+  <div class="partners-grid partners-grid--gold">
+    <a
+      *ngFor="let partner of goldPartners"
+      class="partner-card partner-card--gold"
+      [href]="siteUrl(partner)"
+      target="_blank"
+      rel="noopener noreferrer">
+      <img *ngIf="partner.logoUrl" [src]="partner.logoUrl" [alt]="partner.name" class="partner-logo partner-logo--gold">
+      <div *ngIf="!partner.logoUrl" class="partner-logo-fallback partner-logo-fallback--gold">{{ initials(partner.name) }}</div>
+      <span class="partner-name">{{ partner.name }}</span>
+    </a>
+  </div>
+</section>
+
+<section class="tier-section" *ngIf="silverPartners.length">
+  <h2 class="tier-title">{{ 'marketing.partnersList.silverTitle' | translate }}</h2>
+  <div class="partners-grid partners-grid--silver">
+    <a
+      *ngFor="let partner of silverPartners"
+      class="partner-card partner-card--silver"
+      [href]="siteUrl(partner)"
+      target="_blank"
+      rel="noopener noreferrer"
+      [attr.title]="partner.name">
+      <img *ngIf="partner.logoUrl" [src]="partner.logoUrl" [alt]="partner.name" class="partner-logo partner-logo--silver">
+      <div *ngIf="!partner.logoUrl" class="partner-logo-fallback partner-logo-fallback--silver">{{ initials(partner.name) }}</div>
+      <span class="partner-name">{{ partner.name }}</span>
+    </a>
+  </div>
+</section>

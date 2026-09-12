@@ -1,0 +1,91 @@
+.app-shell {
+  height: 100vh;
+}
+
+.app-sidenav {
+  width: 260px;
+  border-right: none;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.04);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--mdc-theme-primary, #3f51b5);
+}
+
+mat-nav-list a {
+  border-radius: 10px;
+  margin: 2px 12px;
+  width: calc(100% - 24px);
+}
+
+.active-link {
+  background-color: rgba(63, 81, 181, 0.1);
+  color: #3f51b5;
+  font-weight: 500;
+}
+
+.app-toolbar {
+  position: sticky;
+  top: 44px;
+  z-index: 10;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+}
+
+.toolbar-title {
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.app-version {
+  font-size: 11px;
+  color: #9aa0a6;
+  margin-right: 4px;
+  white-space: nowrap;
+}
+
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: none;
+  border-radius: 20px;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #3f51b5;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-name {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .user-name {
+    display: inline;
+  }
+}
+
+.app-content {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}

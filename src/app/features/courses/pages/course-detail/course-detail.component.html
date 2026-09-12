@@ -1,0 +1,102 @@
+<app-loading-spinner *ngIf="loading" [message]="'courses.detail.loading' | translate"></app-loading-spinner>
+
+<ng-container *ngIf="!loading && course">
+  <div class="hero" [style.backgroundImage]="course.imageUrl ? 'url(' + course.imageUrl + ')' : null">
+    <div class="hero-overlay">
+      <button mat-icon-button routerLink="/courses" [attr.aria-label]="'common.back' | translate" class="back-button">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="hero-content">
+        <h1>{{ course.name }}</h1>
+        <p>{{ course.description }}</p>
+        <div class="hero-actions">
+          <button mat-flat-button color="primary" [routerLink]="['/courses', course.id, 'enroll']">
+            <mat-icon>how_to_reg</mat-icon>
+            {{ 'courses.detail.enroll' | translate }}
+          </button>
+          <button mat-stroked-button [routerLink]="['/courses', course.id, 'edit']">
+            <mat-icon>edit</mat-icon>
+            {{ 'courses.detail.edit' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <mat-tab-group class="detail-tabs">
+    <mat-tab [label]="'courses.detail.overviewTab' | translate">
+      <div class="tab-content">
+        <p><strong>{{ 'courses.detail.duration' | translate }}</strong> {{ course.duration || ('courses.detail.notInformed' | translate) }}</p>
+        <p><strong>{{ 'courses.detail.status' | translate }}</strong> {{ (course.status === 'ACTIVE' ? 'common.active' : 'common.inactive') | translate }}</p>
+      </div>
+    </mat-tab>
+    <mat-tab [label]="'courses.detail.studentsTab' | translate">
+      <div class="tab-content">
+        <div class="students-tab-header">
+          <button mat-stroked-button color="primary" [routerLink]="['/courses', course.id, 'enroll']">
+            <mat-icon>person_add</mat-icon>
+            {{ 'courses.detail.enroll' | translate }}
+          </button>
+        </div>
+
+        <app-empty-state
+          *ngIf="!students.length"
+          icon="group"
+          [title]="'courses.detail.emptyStudentsTitle' | translate"
+          [subtitle]="'courses.detail.emptyStudentsSubtitle' | translate"
+        ></app-empty-state>
+
+        <div class="enrolled-students" *ngIf="students.length">
+          <a class="enrolled-student-row" *ngFor="let student of students" [routerLink]="['/talentos', student.id]">
+            <app-student-avatar [name]="student.fullName || '?'" [photoUrl]="student.photoUrl" [seed]="student.id" [size]="44"></app-student-avatar>
+            <div class="enrolled-student-info">
+              <div class="enrolled-student-name">{{ student.fullName || ('common.dash' | translate) }}</div>
+              <div class="enrolled-student-email">{{ student.email }}</div>
+            </div>
+            <div class="enrolled-student-progress" *ngIf="progressByStudentId.get(student.id) as progress">
+              <mat-chip [class]="courseStatusClass(student.id)">
+                {{ 'students.courseStatus.' + progress.status | translate }}
+              </mat-chip>
+              <span class="progress-percent">{{ 'students.courseStatus.progressPercent' | translate: { percent: progress.progressPercent } }}</span>
+            </div>
+            <mat-chip class="points-chip" *ngIf="gamificationByStudentId.get(student.id) as gam">
+              <mat-icon inline>military_tech</mat-icon>
+              {{ 'students.gamification.pointsShort' | translate: { points: gam.totalPoints } }}
+            </mat-chip>
+          </a>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab [label]="'courses.detail.modulesTab' | translate">
+      <div class="tab-content">
+        <div class="modules-header" *ngIf="auth.isAdmin()">
+          <button mat-flat-button color="primary" [routerLink]="['/courses', course.id, 'modules', 'new']">
+            <mat-icon>add</mat-icon>
+            {{ 'courseModules.list.new' | translate }}
+          </button>
+        </div>
+
+        <app-loading-spinner *ngIf="modulesLoading" [message]="'courseModules.list.loading' | translate"></app-loading-spinner>
+
+        <app-empty-state
+          *ngIf="!modulesLoading && !modules.length"
+          icon="view_module"
+          [title]="'courseModules.list.emptyTitle' | translate"
+          [subtitle]="'courseModules.list.emptySubtitle' | translate"
+        ></app-empty-state>
+
+        <mat-nav-list *ngIf="!modulesLoading && modules.length">
+          <a mat-list-item *ngFor="let module of modules" [routerLink]="['/courses', course.id, 'modules', module.id]">
+            <mat-icon matListItemIcon>{{ module.modality === 'PRESENCIAL' ? 'groups' : 'laptop' }}</mat-icon>
+            <span matListItemTitle>{{ module.order }}. {{ module.title }}</span>
+            <span matListItemLine>{{ (module.modality === 'ONLINE' ? 'courseModules.modality.online' : 'courseModules.modality.presencial') | translate }}</span>
+            <mat-chip matListItemMeta class="points-chip">
+              <mat-icon inline>military_tech</mat-icon>
+              {{ 'courseModules.detail.pointsChip' | translate: { points: module.points || 0 } }}
+            </mat-chip>
+          </a>
+        </mat-nav-list>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</ng-container>

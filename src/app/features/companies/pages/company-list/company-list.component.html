@@ -1,0 +1,58 @@
+<div class="page-header">
+  <div>
+    <h1>{{ 'companies.list.title' | translate }}</h1>
+    <p class="page-subtitle">{{ 'companies.list.subtitle' | translate }}</p>
+  </div>
+  <button mat-flat-button color="primary" (click)="goToNew()">
+    <mat-icon>add</mat-icon>
+    {{ 'companies.list.new' | translate }}
+  </button>
+</div>
+
+<mat-form-field appearance="outline" class="search-field">
+  <mat-label>{{ 'companies.list.searchLabel' | translate }}</mat-label>
+  <input matInput [formControl]="searchControl" [placeholder]="'companies.list.searchPlaceholder' | translate">
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+
+<app-loading-spinner *ngIf="loading" [message]="'companies.list.loading' | translate"></app-loading-spinner>
+
+<ng-container *ngIf="!loading">
+  <app-empty-state
+    *ngIf="!companies.length"
+    icon="business"
+    [title]="'companies.list.emptyTitle' | translate"
+    [subtitle]="'companies.list.emptySubtitle' | translate"
+    [actionLabel]="'companies.list.new' | translate"
+    (action)="goToNew()"
+  ></app-empty-state>
+
+  <div class="company-grid" *ngIf="companies.length">
+    <mat-card class="company-card" *ngFor="let company of companies" [routerLink]="[company.id]">
+      <div class="logo-wrapper">
+        <img *ngIf="company.logoUrl" [src]="company.logoUrl" [alt]="company.name" (error)="$event.target.style.display='none'">
+        <mat-icon *ngIf="!company.logoUrl">business</mat-icon>
+      </div>
+      <mat-card-content>
+        <h3>{{ company.name }}</h3>
+        <p class="company-description">{{ company.description || ('common.noDescriptionProvided' | translate) }}</p>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-icon-button [matMenuTriggerFor]="rowMenu" (click)="$event.stopPropagation()">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #rowMenu="matMenu">
+          <a mat-menu-item [routerLink]="[company.id, 'edit']">
+            <mat-icon>edit</mat-icon>
+            <span>{{ 'common.edit' | translate }}</span>
+          </a>
+          <button mat-menu-item (click)="confirmDelete(company, $event)">
+            <mat-icon color="warn">delete</mat-icon>
+            <span>{{ 'common.delete' | translate }}</span>
+          </button>
+        </mat-menu>
+        <button mat-button color="primary">{{ 'common.viewDetails' | translate }}</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</ng-container>

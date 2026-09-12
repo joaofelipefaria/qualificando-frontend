@@ -1,0 +1,49 @@
+<div class="splash-overlay">
+  <button
+    mat-icon-button
+    class="close-button"
+    [attr.aria-label]="'common.close' | translate"
+    (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div class="splash-content">
+    <mat-icon class="brand-icon">hub</mat-icon>
+    <h1>{{ 'marketing.partnersSplash.title' | translate }}</h1>
+    <p class="subtitle">{{ 'marketing.partnersSplash.subtitle' | translate }}</p>
+
+    <!-- Platinum: logo grande + texto -->
+    <div class="partners-grid partners-grid--platinum">
+      <a class="partner-card partner-card--platinum" *ngFor="let partner of platinumPartners"
+         [href]="siteUrl(partner)" target="_blank" rel="noopener noreferrer">
+        <img *ngIf="partner.logoUrl" [src]="partner.logoUrl" [alt]="partner.name" class="partner-logo partner-logo--platinum">
+        <div *ngIf="!partner.logoUrl" class="partner-logo-fallback partner-logo-fallback--platinum">{{ initials(partner.name) }}</div>
+        <span class="partner-name partner-name--platinum">{{ partner.name }}</span>
+        <p *ngIf="partner.description" class="partner-description">{{ partner.description }}</p>
+      </a>
+    </div>
+
+    <!-- Gold: logo menor + nome embaixo -->
+    <div class="partners-grid partners-grid--gold">
+      <a class="partner-card partner-card--gold" *ngFor="let partner of goldPartners"
+         [href]="siteUrl(partner)" target="_blank" rel="noopener noreferrer">
+        <img *ngIf="partner.logoUrl" [src]="partner.logoUrl" [alt]="partner.name" class="partner-logo partner-logo--gold">
+        <div *ngIf="!partner.logoUrl" class="partner-logo-fallback partner-logo-fallback--gold">{{ initials(partner.name) }}</div>
+        <span class="partner-name partner-name--gold">{{ partner.name }}</span>
+      </a>
+    </div>
+
+    <!-- Silver: somente logo, menor -->
+    <div class="partners-grid partners-grid--silver">
+      <a class="partner-card partner-card--silver" *ngFor="let partner of silverPartners"
+         [href]="siteUrl(partner)" target="_blank" rel="noopener noreferrer" [attr.title]="partner.name">
+        <img *ngIf="partner.logoUrl" [src]="partner.logoUrl" [alt]="partner.name" class="partner-logo partner-logo--silver">
+        <div *ngIf="!partner.logoUrl" class="partner-logo-fallback partner-logo-fallback--silver">{{ initials(partner.name) }}</div>
+      </a>
+    </div>
+
+    <button mat-flat-button color="accent" class="enter-button" (click)="close()">
+      {{ 'marketing.partnersSplash.enter' | translate }}
+    </button>
+  </div>
+</div>

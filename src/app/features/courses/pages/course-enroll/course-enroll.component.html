@@ -1,0 +1,87 @@
+<div class="page-header">
+  <div>
+    <h1>{{ 'courses.enroll.title' | translate }}</h1>
+    <p class="page-subtitle" *ngIf="course">{{ 'courses.enroll.subtitle' | translate: { course: course.name } }}</p>
+  </div>
+  <button mat-stroked-button [routerLink]="['/courses', courseId]">
+    <mat-icon>arrow_back</mat-icon>
+    {{ 'common.back' | translate }}
+  </button>
+</div>
+
+<p class="mock-note">
+  <mat-icon inline>info</mat-icon>
+  {{ 'courses.enroll.mockNote' | translate }}
+</p>
+
+<mat-form-field appearance="outline" class="search-field">
+  <mat-label>{{ 'students.list.searchLabel' | translate }}</mat-label>
+  <input matInput [formControl]="searchControl" [placeholder]="'students.list.searchPlaceholder' | translate">
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+
+<app-loading-spinner *ngIf="loading" [message]="'students.list.loading' | translate"></app-loading-spinner>
+
+<ng-container *ngIf="!loading">
+  <app-empty-state
+    *ngIf="!students.length"
+    icon="school"
+    [title]="'students.list.emptyTitle' | translate"
+    [subtitle]="'students.list.emptySubtitle' | translate"
+  ></app-empty-state>
+
+  <div class="table-card" *ngIf="students.length">
+    <table mat-table [dataSource]="students" class="mat-elevation-z0">
+      <ng-container matColumnDef="avatar">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let student">
+          <app-student-avatar [name]="student.fullName || '?'" [photoUrl]="student.photoUrl" [seed]="student.id" [size]="36"></app-student-avatar>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>{{ 'students.list.columnName' | translate }}</th>
+        <td mat-cell *matCellDef="let student">{{ student.fullName || ('common.dash' | translate) }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>{{ 'students.list.columnEmail' | translate }}</th>
+        <td mat-cell *matCellDef="let student">{{ student.email || ('common.dash' | translate) }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="education">
+        <th mat-header-cell *matHeaderCellDef>{{ 'students.list.columnEducation' | translate }}</th>
+        <td mat-cell *matCellDef="let student">{{ student.education || ('common.dash' | translate) }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let student">
+          <mat-chip *ngIf="isEnrolled(student)" class="status-active">
+            <mat-icon inline>check_circle</mat-icon>
+            {{ 'courses.enroll.alreadyEnrolled' | translate }}
+          </mat-chip>
+          <button
+            *ngIf="!isEnrolled(student)"
+            mat-flat-button
+            color="primary"
+            [disabled]="enrollingId === student.id"
+            (click)="enroll(student)">
+            <mat-icon>how_to_reg</mat-icon>
+            {{ enrollingId === student.id ? ('courses.enroll.enrolling' | translate) : ('courses.enroll.enrollAction' | translate) }}
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator
+      [length]="totalElements"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[10, 20, 50]"
+      (page)="onPage($event)">
+    </mat-paginator>
+  </div>
+</ng-container>

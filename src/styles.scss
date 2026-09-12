@@ -1,0 +1,48 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$qualificando-primary: mat.define-palette(mat.$indigo-palette);
+$qualificando-accent: mat.define-palette(mat.$purple-palette, A200, A100, A400);
+$qualificando-warn: mat.define-palette(mat.$red-palette);
+
+$qualificando-theme: mat.define-light-theme((
+  color: (
+    primary: $qualificando-primary,
+    accent: $qualificando-accent,
+    warn: $qualificando-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+@include mat.all-component-themes($qualificando-theme);
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f5f6fa;
+  color: #202124;
+}
+
+.snackbar-success {
+  --mdc-snackbar-container-color: #1e7e34;
+  --mdc-snackbar-supporting-text-color: #fff;
+}
+
+.snackbar-error {
+  --mdc-snackbar-container-color: #c5221f;
+  --mdc-snackbar-supporting-text-color: #fff;
+}
+
+mat-card {
+  border-radius: 16px !important;
+}

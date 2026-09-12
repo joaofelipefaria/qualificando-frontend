@@ -1,0 +1,54 @@
+<app-loading-spinner *ngIf="loading" [message]="'companies.detail.loading' | translate"></app-loading-spinner>
+
+<ng-container *ngIf="!loading && company">
+  <div class="page-header">
+    <button mat-icon-button routerLink="/companies" [attr.aria-label]="'common.back' | translate">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>{{ company.name }}</h1>
+    <span class="spacer"></span>
+    <button mat-stroked-button [routerLink]="['/companies', company.id, 'edit']">
+      <mat-icon>edit</mat-icon>
+      {{ 'common.edit' | translate }}
+    </button>
+  </div>
+
+  <mat-card class="header-card">
+    <mat-card-content>
+      <p class="description">{{ company.description || ('common.noDescriptionProvided' | translate) }}</p>
+      <p class="description" *ngIf="company.website">
+        <mat-icon inline>link</mat-icon>
+        <a [href]="company.website" target="_blank" rel="noopener">{{ company.website }}</a>
+      </p>
+      <mat-chip [class.status-active]="company.status === 'ACTIVE'" [class.status-inactive]="company.status !== 'ACTIVE'">
+        {{ (company.status === 'ACTIVE' ? 'common.active' : 'common.inactive') | translate }}
+      </mat-chip>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="header-card presencial-card">
+    <mat-card-content>
+      <h2>{{ 'companies.detail.presencialTitle' | translate }}</h2>
+      <p class="description">
+        <mat-icon inline class="status-icon" [style.color]="company.ofereceTreinamentoPresencial ? '#1e8e3e' : '#c5221f'">
+          {{ company.ofereceTreinamentoPresencial ? 'check_circle' : 'cancel' }}
+        </mat-icon>
+        {{ (company.ofereceTreinamentoPresencial ? 'companies.detail.offersPresencialYes' : 'companies.detail.offersPresencialNo') | translate }}
+      </p>
+
+      <ng-container *ngIf="company.ofereceTreinamentoPresencial">
+        <div class="availability-list" *ngIf="company.diasTreinamentoPresencial?.length">
+          <div class="availability-row" *ngFor="let day of company.diasTreinamentoPresencial">
+            <mat-icon inline>event_available</mat-icon>
+            <span>
+              {{ ('companies.detail.weekday.' + day) | translate }}
+              <span *ngIf="company.horarioTreinamentoInicio && company.horarioTreinamentoFim">
+                &middot; {{ 'companies.detail.scheduleTime' | translate: { start: company.horarioTreinamentoInicio, end: company.horarioTreinamentoFim } }}
+              </span>
+            </span>
+          </div>
+        </div>
+      </ng-container>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

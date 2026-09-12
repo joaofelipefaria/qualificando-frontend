@@ -1,0 +1,115 @@
+<div class="page-header">
+  <div>
+    <h1>{{ 'admin.title' | translate }}</h1>
+    <p class="page-subtitle">{{ 'admin.subtitle' | translate }}</p>
+  </div>
+</div>
+
+<mat-tab-group animationDuration="0ms">
+  <!-- ===== Communities (default/opening tab) ===== -->
+  <mat-tab [label]="'admin.tabs.communities' | translate">
+    <div class="tab-content">
+      <div class="tab-toolbar">
+        <p class="tab-description">{{ 'admin.communities.description' | translate }}</p>
+        <button mat-flat-button color="primary" routerLink="/communities/new">
+          <mat-icon>add</mat-icon>
+          {{ 'admin.communities.new' | translate }}
+        </button>
+      </div>
+      <app-community-list></app-community-list>
+    </div>
+  </mat-tab>
+
+  <!-- ===== Courses ===== -->
+  <mat-tab [label]="'admin.tabs.courses' | translate">
+    <div class="tab-content">
+      <div class="tab-toolbar">
+        <p class="tab-description">{{ 'admin.courses.description' | translate }}</p>
+        <button mat-flat-button color="primary" routerLink="/courses/new">
+          <mat-icon>add</mat-icon>
+          {{ 'admin.courses.new' | translate }}
+        </button>
+      </div>
+      <app-course-list></app-course-list>
+    </div>
+  </mat-tab>
+
+  <!-- ===== Users ===== -->
+  <mat-tab [label]="'admin.tabs.users' | translate">
+    <div class="tab-content">
+      <p class="tab-description">{{ 'admin.users.subtitle' | translate }}</p>
+
+      <div class="tab-toolbar">
+        <form class="search-form" (ngSubmit)="fetch()">
+          <mat-form-field appearance="outline" class="search-field">
+            <mat-label>{{ 'admin.users.searchLabel' | translate }}</mat-label>
+            <input matInput [formControl]="searchControl" [placeholder]="'admin.users.searchPlaceholder' | translate">
+            <mat-icon matPrefix>search</mat-icon>
+          </mat-form-field>
+          <button mat-stroked-button type="submit">
+            <mat-icon>search</mat-icon>
+            {{ 'admin.users.search' | translate }}
+          </button>
+        </form>
+        <button mat-flat-button color="primary" routerLink="/admin/users/new">
+          <mat-icon>person_add</mat-icon>
+          {{ 'admin.users.new' | translate }}
+        </button>
+      </div>
+
+      <app-loading-spinner *ngIf="loading" [message]="'admin.users.loading' | translate"></app-loading-spinner>
+
+      <ng-container *ngIf="!loading">
+        <app-empty-state
+          *ngIf="!users.length && !isSearchActive"
+          icon="group"
+          [title]="'admin.users.emptyTitle' | translate"
+          [subtitle]="'admin.users.emptySubtitle' | translate"
+        ></app-empty-state>
+
+        <app-empty-state
+          *ngIf="!users.length && isSearchActive"
+          icon="search_off"
+          [title]="'admin.users.emptySearchTitle' | translate"
+          [subtitle]="'admin.users.emptySearchSubtitle' | translate"
+        ></app-empty-state>
+
+        <div class="table-card" *ngIf="users.length">
+          <table mat-table [dataSource]="users" class="mat-elevation-z0">
+            <ng-container matColumnDef="fullName">
+              <th mat-header-cell *matHeaderCellDef>{{ 'admin.users.columnName' | translate }}</th>
+              <td mat-cell *matCellDef="let user">{{ user.fullName }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>{{ 'admin.users.columnEmail' | translate }}</th>
+              <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef>{{ 'admin.users.columnRole' | translate }}</th>
+              <td mat-cell *matCellDef="let user">{{ roleLabel(user.role) }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="community">
+              <th mat-header-cell *matHeaderCellDef>{{ 'admin.users.columnCommunity' | translate }}</th>
+              <td mat-cell *matCellDef="let user">{{ communityLabel(user) }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let user">
+                <a mat-icon-button [routerLink]="['/admin/users', user.id, 'edit']" [attr.aria-label]="'common.edit' | translate">
+                  <mat-icon>edit</mat-icon>
+                </a>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </ng-container>
+    </div>
+  </mat-tab>
+</mat-tab-group>

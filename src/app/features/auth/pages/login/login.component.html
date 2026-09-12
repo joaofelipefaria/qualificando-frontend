@@ -1,0 +1,35 @@
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-header">
+      <h1>{{ 'app.title' | translate }}</h1>
+      <p>{{ 'login.subtitle' | translate }}</p>
+    </div>
+
+    <div class="login-form">
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <form (submit)="login()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'login.email' | translate }}</mat-label>
+          <input matInput [formControl]="email" type="email" autocomplete="email" [disabled]="logging">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'login.password' | translate }}</mat-label>
+          <input matInput [formControl]="password" type="password" autocomplete="current-password" [disabled]="logging">
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" type="submit" class="full-width" [disabled]="logging || !email.value || !password.value">
+          <mat-progress-spinner *ngIf="logging" mode="indeterminate" diameter="18" class="button-spinner"></mat-progress-spinner>
+          <span *ngIf="!logging">{{ 'login.button' | translate }}</span>
+        </button>
+      </form>
+    </div>
+
+    <div class="login-footer">
+      <span class="app-version">v{{ appVersion }}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="page-header">
+  <div>
+    <h1>{{ 'communities.list.title' | translate }}</h1>
+    <p class="page-subtitle">{{ 'communities.list.subtitle' | translate }}</p>
+  </div>
+</div>
+
+<mat-form-field appearance="outline" class="search-field">
+  <mat-label>{{ 'communities.list.searchLabel' | translate }}</mat-label>
+  <input matInput [formControl]="searchControl" [placeholder]="'communities.list.searchPlaceholder' | translate">
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+
+<app-loading-spinner *ngIf="loading" [message]="'communities.list.loading' | translate"></app-loading-spinner>
+
+<ng-container *ngIf="!loading">
+  <app-empty-state
+    *ngIf="!communities.length"
+    icon="groups"
+    [title]="'communities.list.emptyTitle' | translate"
+    [subtitle]="'communities.list.emptySubtitle' | translate"
+  ></app-empty-state>
+
+  <div class="table-card" *ngIf="communities.length">
+    <table mat-table [dataSource]="communities" class="mat-elevation-z0">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>{{ 'communities.list.columnName' | translate }}</th>
+        <td mat-cell *matCellDef="let community">
+          <a [routerLink]="['/communities', community.id]" class="row-link">{{ community.name }}</a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>{{ 'communities.list.columnDescription' | translate }}</th>
+        <td mat-cell *matCellDef="let community">{{ community.description || ('common.dash' | translate) }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>{{ 'communities.list.columnStatus' | translate }}</th>
+        <td mat-cell *matCellDef="let community">
+          <mat-chip [class.status-active]="community.status === 'ACTIVE'" [class.status-inactive]="community.status !== 'ACTIVE'">
+            {{ (community.status === 'ACTIVE' ? 'common.active' : 'common.inactive') | translate }}
+          </mat-chip>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef>{{ 'communities.list.columnCreated' | translate }}</th>
+        <td mat-cell *matCellDef="let community">{{ community.createdAt | date: 'mediumDate' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let community">
+          <button mat-icon-button [matMenuTriggerFor]="rowMenu" (click)="$event.stopPropagation()">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #rowMenu="matMenu">
+            <a mat-menu-item [routerLink]="['/communities', community.id]">
+              <mat-icon>visibility</mat-icon>
+              <span>{{ 'common.view' | translate }}</span>
+            </a>
+            <a mat-menu-item [routerLink]="['/communities', community.id, 'edit']">
+              <mat-icon>edit</mat-icon>
+              <span>{{ 'common.edit' | translate }}</span>
+            </a>
+            <button mat-menu-item (click)="confirmDelete(community)">
+              <mat-icon color="warn">delete</mat-icon>
+              <span>{{ 'common.delete' | translate }}</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator
+      [length]="totalElements"
+      [pageIndex]="pageIndex"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[10, 20, 50]"
+      (page)="onPage($event)">
+    </mat-paginator>
+  </div>
+</ng-container>

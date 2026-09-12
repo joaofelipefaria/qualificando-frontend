@@ -1,0 +1,124 @@
+<div class="page-header">
+  <button mat-icon-button routerLink="/talentos" [attr.aria-label]="'common.back' | translate">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h1>{{ (isEditMode ? 'students.form.editTitle' : 'students.form.newTitle') | translate }}</h1>
+</div>
+
+<mat-card class="form-card">
+  <mat-card-content>
+    <div class="loading-inline" *ngIf="loading">
+      <mat-progress-spinner mode="indeterminate" diameter="32"></mat-progress-spinner>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!loading">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'students.form.communityId' | translate }}</mat-label>
+        <mat-select formControlName="communityId" [disabled]="communitiesLoading">
+          <mat-option *ngFor="let community of communities" [value]="community.id">{{ community.name }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls.communityId.hasError('required')">{{ 'students.form.communityRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'students.form.fullName' | translate }}</mat-label>
+        <input matInput formControlName="fullName" [placeholder]="'students.form.fullNamePlaceholder' | translate">
+        <mat-error *ngIf="form.controls.fullName.hasError('required')">{{ 'students.form.fullNameRequired' | translate }}</mat-error>
+        <mat-error *ngIf="form.controls.fullName.hasError('maxlength')">{{ 'students.form.fullNameTooLong' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'students.form.email' | translate }}</mat-label>
+        <input matInput type="email" formControlName="email" [placeholder]="'students.form.emailPlaceholder' | translate">
+        <mat-error *ngIf="form.controls.email.hasError('required')">{{ 'students.form.emailRequired' | translate }}</mat-error>
+        <mat-error *ngIf="form.controls.email.hasError('email')">{{ 'students.form.emailInvalid' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'students.form.phone' | translate }}</mat-label>
+        <input matInput formControlName="phone" [placeholder]="'students.form.phonePlaceholder' | translate">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'students.form.address' | translate }}</mat-label>
+        <input matInput formControlName="address" [placeholder]="'students.form.addressPlaceholder' | translate">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'students.form.education' | translate }}</mat-label>
+        <mat-select formControlName="education">
+          <mat-option value="">{{ 'students.form.educationPlaceholder' | translate }}</mat-option>
+          <mat-option *ngFor="let level of educationLevels" [value]="level">{{ level }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'students.form.coursePreferences' | translate }}</mat-label>
+        <mat-select formControlName="coursePreferences" multiple>
+          <mat-option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</mat-option>
+        </mat-select>
+        <mat-hint>{{ 'students.form.coursePreferencesHint' | translate }}</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'students.form.linkedUser' | translate }}</mat-label>
+        <input
+          matInput
+          [formControl]="linkedUserControl"
+          [matAutocomplete]="userAuto"
+          [placeholder]="'students.form.linkedUserPlaceholder' | translate">
+        <button
+          *ngIf="selectedUser"
+          matSuffix
+          mat-icon-button
+          type="button"
+          [attr.aria-label]="'students.form.linkedUserClear' | translate"
+          (click)="clearLinkedUser()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-autocomplete #userAuto="matAutocomplete" [displayWith]="displayUser" (optionSelected)="onUserSelected($event)">
+          <mat-option *ngIf="usersLoading" disabled>{{ 'students.form.linkedUserLoading' | translate }}</mat-option>
+          <ng-container *ngIf="!usersLoading">
+            <mat-option *ngFor="let user of filteredUsers" [value]="user">{{ displayUser(user) }}</mat-option>
+            <mat-option *ngIf="!filteredUsers.length" disabled>{{ 'students.form.linkedUserEmpty' | translate }}</mat-option>
+          </ng-container>
+        </mat-autocomplete>
+        <mat-hint>{{ 'students.form.linkedUserHint' | translate }}</mat-hint>
+      </mat-form-field>
+
+      <div class="form-field-group">
+        <label class="group-label">{{ 'students.form.isPcd' | translate }}</label>
+        <mat-radio-group formControlName="isPcd">
+          <mat-radio-button [value]="true">{{ 'common.yes' | translate }}</mat-radio-button>
+          <mat-radio-button [value]="false">{{ 'common.no' | translate }}</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width" *ngIf="isPcd">
+        <mat-label>{{ 'students.form.pcdDescription' | translate }}</mat-label>
+        <textarea
+          matInput
+          rows="3"
+          formControlName="pcdDescription"
+          [placeholder]="'students.form.pcdDescriptionPlaceholder' | translate"></textarea>
+        <mat-error *ngIf="form.controls.pcdDescription.hasError('required')">{{ 'students.form.pcdDescriptionRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'students.form.status' | translate }}</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="ACTIVE">{{ 'common.active' | translate }}</mat-option>
+          <mat-option value="INACTIVE">{{ 'common.inactive' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-button type="button" routerLink="/talentos" [disabled]="saving">{{ 'students.form.cancel' | translate }}</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="saving">
+          <mat-progress-spinner *ngIf="saving" mode="indeterminate" diameter="18" class="button-spinner"></mat-progress-spinner>
+          <span *ngIf="!saving">{{ (isEditMode ? 'students.form.saveChanges' : 'students.form.create') | translate }}</span>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,65 @@
+<mat-sidenav-container class="app-shell">
+  <mat-sidenav
+    #sidenav
+    class="app-sidenav"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false">
+    <div class="brand">
+      <mat-icon>hub</mat-icon>
+      <span>{{ 'nav.brand' | translate }}</span>
+    </div>
+    <mat-nav-list>
+      <a
+        mat-list-item
+        *ngFor="let item of navItems"
+        [routerLink]="item.route"
+        routerLinkActive="active-link">
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemTitle>{{ item.labelKey | translate }}</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-partners-top-bar></app-partners-top-bar>
+
+    <mat-toolbar class="app-toolbar">
+      <button
+        mat-icon-button
+        *ngIf="isHandset$ | async"
+        (click)="sidenav.toggle()"
+        [attr.aria-label]="'nav.toggleNavigation' | translate">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <span class="toolbar-title">{{ 'app.title' | translate }}</span>
+      <span class="spacer"></span>
+
+      <button mat-icon-button [attr.aria-label]="'nav.notifications' | translate" matBadge="0" matBadgeColor="warn" [matBadgeHidden]="true">
+        <mat-icon>notifications_none</mat-icon>
+      </button>
+
+      <span class="app-version">v{{ appVersion }}</span>
+
+      <button mat-button [matMenuTriggerFor]="userMenu" class="user-chip">
+        <span class="avatar">{{ initials }}</span>
+        <span class="user-name">{{ displayName }}</span>
+        <mat-icon>expand_more</mat-icon>
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <a mat-menu-item routerLink="/profile">
+          <mat-icon>person</mat-icon>
+          <span>{{ 'nav.myProfile' | translate }}</span>
+        </a>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>{{ 'nav.logout' | translate }}</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <main class="app-content">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

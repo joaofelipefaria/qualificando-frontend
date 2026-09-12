@@ -1,0 +1,689 @@
+{
+  "app": {
+    "title": "Qualificando MVP"
+  },
+  "login": {
+    "subtitle": "Selecione um perfil para entrar",
+    "selectUser": "Perfil",
+    "button": "Entrar"
+  },
+  "nav": {
+    "brand": "Qualificando",
+    "toggleNavigation": "Alternar navegação",
+    "notifications": "Notificações",
+    "myProfile": "Meu perfil",
+    "logout": "Sair",
+    "dashboard": "Dashboard",
+    "communities": "Comunidades",
+    "talentos": "Talentos",
+    "companies": "Empresas",
+    "courses": "Cursos",
+    "coursesTech": "Carreira Tech",
+    "jobs": "Vagas",
+    "admin": "Administração",
+    "partners": "Parceiros"
+  },
+  "common": {
+    "back": "Voltar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "cancel": "Cancelar",
+    "view": "Visualizar",
+    "viewDetails": "Ver detalhes",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "notInformed": "Não informado",
+    "noDescriptionProvided": "Nenhuma descrição fornecida.",
+    "dash": "—",
+    "close": "Fechar",
+    "yes": "Sim",
+    "no": "Não"
+  },
+  "confirmDialog": {
+    "cancelButton": "Cancelar",
+    "deleteButton": "Excluir"
+  },
+  "emptyState": {
+    "defaultTitle": "Nada por aqui ainda"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Visão geral da atividade da sua comunidade",
+    "loading": "Carregando resumo...",
+    "recentCourses": "Cursos recentes",
+    "noRecentCourses": "Nenhum curso recente para exibir.",
+    "studentsCount": "{{count}} alunos",
+    "cardCommunities": "Comunidades",
+    "cardStudents": "Alunos",
+    "cardCompanies": "Empresas",
+    "cardCourses": "Cursos"
+  },
+  "profile": {
+    "title": "Meu perfil",
+    "loading": "Carregando perfil...",
+    "noRoles": "Nenhum papel atribuído.",
+    "edit": "Editar perfil",
+    "fullName": "Nome",
+    "fullNameRequired": "O nome é obrigatório.",
+    "email": "E-mail",
+    "emailRequired": "O e-mail é obrigatório.",
+    "emailInvalid": "Informe um e-mail válido.",
+    "phone": "Telefone",
+    "phonePlaceholder": "(00) 00000-0000",
+    "address": "Endereço",
+    "addressPlaceholder": "Rua, número, bairro, cidade",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "updated": "Perfil atualizado com sucesso."
+  },
+  "companies": {
+    "list": {
+      "title": "Empresas",
+      "subtitle": "Empresas parceiras conectadas à comunidade",
+      "new": "Nova empresa",
+      "searchLabel": "Pesquisar empresas",
+      "searchPlaceholder": "Pesquisar por nome",
+      "loading": "Carregando empresas...",
+      "emptyTitle": "Nenhuma empresa encontrada",
+      "emptySubtitle": "Adicione sua primeira empresa parceira."
+    },
+    "form": {
+      "editTitle": "Editar empresa",
+      "newTitle": "Nova empresa",
+      "communityId": "Comunidade",
+      "communityRequired": "A comunidade é obrigatória.",
+      "name": "Nome",
+      "namePlaceholder": "Nome da empresa",
+      "nameRequired": "O nome é obrigatório.",
+      "description": "Descrição",
+      "logoUrl": "URL do logotipo",
+      "website": "Site",
+      "status": "Status",
+      "cancel": "Cancelar",
+      "saveChanges": "Salvar alterações",
+      "create": "Criar empresa",
+      "offersPresencialTraining": "A empresa oferece treinamento presencial?",
+      "trainingWeekdays": "Dias da semana",
+      "trainingStartTime": "Horário de início",
+      "trainingEndTime": "Horário de término",
+      "weekday": {
+        "MON": "Segunda-feira",
+        "TUE": "Terça-feira",
+        "WED": "Quarta-feira",
+        "THU": "Quinta-feira",
+        "FRI": "Sexta-feira",
+        "SAT": "Sábado"
+      }
+    },
+    "detail": {
+      "loading": "Carregando empresa...",
+      "presencialTitle": "Treinamento presencial",
+      "offersPresencialYes": "Esta empresa oferece treinamento presencial.",
+      "offersPresencialNo": "Esta empresa não oferece treinamento presencial no momento.",
+      "availabilityTitle": "Disponibilidade de horários",
+      "capacity": "{{count}} vagas",
+      "weekday": {
+        "MON": "Segunda-feira",
+        "TUE": "Terça-feira",
+        "WED": "Quarta-feira",
+        "THU": "Quinta-feira",
+        "FRI": "Sexta-feira",
+        "SAT": "Sábado"
+      },
+      "scheduleTitle": "Horário",
+      "scheduleTime": "{{start}} - {{end}}"
+    },
+    "deleteDialog": {
+      "title": "Excluir empresa",
+      "message": "Tem certeza de que deseja excluir \"{{name}}\"? Esta ação não pode ser desfeita."
+    },
+    "notifications": {
+      "deleted": "Empresa excluída com sucesso.",
+      "created": "Empresa criada com sucesso.",
+      "updated": "Empresa atualizada com sucesso."
+    }
+  },
+  "communities": {
+    "list": {
+      "title": "Gerenciamento de comunidades",
+      "subtitle": "Gerencie as comunidades em execução na plataforma",
+      "new": "Nova comunidade",
+      "searchLabel": "Pesquisar comunidades",
+      "searchPlaceholder": "Pesquisar por nome",
+      "loading": "Carregando comunidades...",
+      "emptyTitle": "Nenhuma comunidade encontrada",
+      "emptySubtitle": "Crie sua primeira comunidade para começar.",
+      "columnName": "Nome",
+      "columnDescription": "Descrição",
+      "columnStatus": "Status",
+      "columnCreated": "Criado em"
+    },
+    "form": {
+      "editTitle": "Editar comunidade",
+      "newTitle": "Nova comunidade",
+      "name": "Nome",
+      "namePlaceholder": "ex.: Comunidade Tech Recife",
+      "nameRequired": "O nome é obrigatório.",
+      "nameTooLong": "O nome é muito longo.",
+      "description": "Descrição",
+      "descriptionPlaceholder": "Sobre o que é essa comunidade?",
+      "status": "Status",
+      "cancel": "Cancelar",
+      "saveChanges": "Salvar alterações",
+      "create": "Criar comunidade"
+    },
+    "detail": {
+      "loading": "Carregando comunidade...",
+      "overviewTab": "Visão geral",
+      "usersTab": "Usuários",
+      "companiesTab": "Empresas",
+      "coursesTab": "Cursos",
+      "overviewText": "Informações gerais sobre {{name}} aparecerão aqui.",
+      "usersText": "Usuários pertencentes a esta comunidade.",
+      "companiesText": "Empresas parceiras desta comunidade.",
+      "coursesText": "Cursos oferecidos dentro desta comunidade."
+    },
+    "deleteDialog": {
+      "title": "Excluir comunidade",
+      "message": "Tem certeza de que deseja excluir \"{{name}}\"? Esta ação não pode ser desfeita."
+    },
+    "notifications": {
+      "deleted": "Comunidade excluída com sucesso.",
+      "created": "Comunidade criada com sucesso.",
+      "updated": "Comunidade atualizada com sucesso."
+    }
+  },
+  "courses": {
+    "list": {
+      "title": "Cursos",
+      "subtitle": "Cursos disponíveis na comunidade",
+      "new": "Novo curso",
+      "searchLabel": "Pesquisar cursos",
+      "searchPlaceholder": "Pesquisar por nome",
+      "loading": "Carregando cursos...",
+      "emptyTitle": "Nenhum curso encontrado",
+      "emptySubtitle": "Crie seu primeiro curso para começar.",
+      "studentsCount": "{{count}} alunos"
+    },
+    "form": {
+      "editTitle": "Editar curso",
+      "newTitle": "Novo curso",
+      "communityId": "Comunidade",
+      "communityRequired": "A comunidade é obrigatória.",
+      "name": "Nome",
+      "namePlaceholder": "Nome do curso",
+      "nameRequired": "O nome é obrigatório.",
+      "description": "Descrição",
+      "duration": "Duração",
+      "durationPlaceholder": "ex.: 8 semanas",
+      "imageUrl": "URL da imagem",
+      "status": "Status",
+      "cancel": "Cancelar",
+      "saveChanges": "Salvar alterações",
+      "create": "Criar curso"
+    },
+    "detail": {
+      "loading": "Carregando curso...",
+      "enroll": "Matricular aluno",
+      "edit": "Editar",
+      "overviewTab": "Visão geral",
+      "studentsTab": "Alunos",
+      "informationTab": "Informações",
+      "duration": "Duração:",
+      "status": "Status:",
+      "notInformed": "Não informado",
+      "emptyStudentsTitle": "Nenhum aluno matriculado",
+      "emptyStudentsSubtitle": "Matricule um aluno para vê-lo listado aqui.",
+      "additionalInfo": "Material adicional do curso e recursos serão listados aqui.",
+      "modulesTab": "Módulos"
+    },
+    "deleteDialog": {
+      "title": "Excluir curso",
+      "message": "Tem certeza de que deseja excluir \"{{name}}\"? Esta ação não pode ser desfeita."
+    },
+    "notifications": {
+      "deleted": "Curso excluído com sucesso.",
+      "created": "Curso criado com sucesso.",
+      "updated": "Curso atualizado com sucesso."
+    },
+      "enroll": {
+        "title": "Matricular aluno",
+        "subtitle": "Selecione um talento para matricular em \"{{course}}\"",
+        "mockNote": "A busca de alunos é real (mesmos dados da tela Talentos). A ação de matricular está simulada nesta versão.",
+        "alreadyEnrolled": "Já matriculado",
+        "enrollAction": "Matricular",
+        "enrolling": "Matriculando...",
+        "notifications": {
+          "enrolled": "{{name}} matriculado(a) com sucesso (simulado)."
+        }
+      }
+    },
+    "coursesTech": {
+      "list": {
+        "title": "Cursos de Tecnologia",
+        "subtitle": "Formação tech para o mercado de trabalho",
+        "new": "Novo curso tech",
+        "searchLabel": "Pesquisar cursos tech",
+        "searchPlaceholder": "Pesquisar por nome ou descrição",
+        "loading": "Carregando cursos...",
+        "emptyTitle": "Nenhum curso encontrado",
+        "emptySubtitle": "Ainda não há cursos de tecnologia cadastrados.",
+        "studentsCount": "{{count}} alunos",
+        "createdSuccess": "Curso de tecnologia criado com sucesso.",
+        "updatedSuccess": "Curso de tecnologia atualizado com sucesso.",
+        "deletedSuccess": "Curso de tecnologia excluído com sucesso."
+      },
+      "form": {
+        "editTitle": "Editar curso tech",
+        "newTitle": "Novo curso tech",
+        "name": "Nome do curso",
+        "namePlaceholder": "ex.: Programador Front-end Junior",
+        "nameRequired": "O nome é obrigatório.",
+        "description": "Descrição",
+        "descriptionPlaceholder": "Descreva o curso...",
+        "community": "Comunidade",
+        "communityRequired": "A comunidade é obrigatória.",
+        "communityPlaceholder": "Selecione a comunidade",
+        "duration": "Carga horária",
+        "durationPlaceholder": "ex.: 40h",
+        "imageUrl": "URL da imagem",
+        "imageUrlPlaceholder": "https://...",
+        "status": "Status",
+        "cancel": "Cancelar",
+        "create": "Criar curso",
+        "saveChanges": "Salvar alterações",
+        "delete": "Excluir curso",
+        "deleteTitle": "Excluir curso",
+        "deleteMessage": "Tem certeza que deseja excluir o curso \"{{name}}\"?",
+        "deleteConfirm": "Sim, excluir",
+        "deleteCancel": "Cancelar"
+      },
+      "detail": {
+        "backToList": "Voltar para lista",
+        "modules": "Módulos",
+        "noModules": "Nenhum módulo cadastrado.",
+        "newModule": "Novo módulo",
+        "enrolledStudents": "Alunos matriculados",
+        "enrollStudent": "Matricular aluno",
+        "noStudents": "Nenhum aluno matriculado.",
+        "studentsList": "Lista de alunos",
+        "backToCourse": "Voltar para o curso"
+      },
+      "enroll": {
+        "title": "Matricular aluno",
+        "subtitle": "Selecione o aluno para matricular no curso",
+        "searchLabel": "Pesquisar alunos",
+        "searchPlaceholder": "Pesquisar por nome ou e-mail",
+        "loading": "Carregando alunos...",
+        "emptyTitle": "Nenhum aluno disponível",
+        "emptySubtitle": "Todos os alunos já estão matriculados ou não há alunos cadastrados.",
+        "alreadyEnrolled": "Já matriculado",
+        "enrollAction": "Matricular",
+        "enrolling": "Matriculando...",
+        "success": "Aluno matriculado com sucesso.",
+        "error": "Não foi possível matricular o aluno."
+      },
+      "moduleForm": {
+        "title": "Módulo do curso",
+        "newTitle": "Novo módulo",
+        "editTitle": "Editar módulo",
+        "name": "Nome do módulo",
+        "namePlaceholder": "ex.: Introdução",
+        "nameRequired": "O nome é obrigatório.",
+        "description": "Descrição",
+        "descriptionPlaceholder": "Descreva o módulo...",
+        "order": "Ordem",
+        "orderPlaceholder": "1",
+        "content": "Conteúdo",
+        "contentPlaceholder": "Conteúdo do módulo...",
+        "cancel": "Cancelar",
+        "create": "Criar módulo",
+        "saveChanges": "Salvar alterações"
+      },
+      "moduleDetail": {
+        "backToCourse": "Voltar para o curso",
+        "content": "Conteúdo do módulo",
+        "edit": "Editar módulo",
+        "noContent": "Nenhum conteúdo cadastrado para este módulo."
+      },
+      "notifications": {
+        "created": "Curso de tecnologia criado com sucesso.",
+        "updated": "Curso de tecnologia atualizado com sucesso.",
+        "createError": "Não foi possível criar o curso de tecnologia.",
+        "deleted": "Curso de tecnologia excluído com sucesso."
+      }
+    },
+    "jobs": {
+    "list": {
+      "title": "Vagas",
+      "subtitle": "Vagas de emprego oferecidas pelas empresas parceiras",
+      "newJob": "Nova vaga",
+      "searchLabel": "Pesquisar vagas",
+      "searchPlaceholder": "Pesquisar por título ou empresa",
+      "loading": "Carregando vagas...",
+      "emptyTitle": "Nenhuma vaga encontrada",
+      "emptySubtitle": "Ainda não há vagas publicadas para esta comunidade.",
+      "publishedAt": "Publicada em {{date}}"
+    },
+    "form": {
+      "companyId": "Empresa",
+      "companyRequired": "A empresa é obrigatória.",
+      "title": "Título",
+      "titlePlaceholder": "Título da vaga",
+      "titleRequired": "O título é obrigatório.",
+      "titleTooLong": "O título é muito longo.",
+      "description": "Descrição",
+      "descriptionPlaceholder": "Descreva a vaga...",
+      "location": "Local",
+      "locationPlaceholder": "ex.: Caldas Novas, GO",
+      "type": "Tipo",
+      "workMode": "Modalidade de trabalho",
+      "isPcd": "Vaga para pessoa com deficiência (PCD)?",
+      "status": "Status",
+      "cancel": "Cancelar",
+      "create": "Criar vaga",
+      "saveChanges": "Salvar alterações"
+    },
+    "notifications": {
+      "created": "Vaga criada com sucesso.",
+      "updated": "Vaga atualizada com sucesso.",
+      "createError": "Não foi possível criar a vaga."
+    },
+    "type": {
+      "CLT": "CLT",
+      "ESTAGIO": "Estágio",
+      "APRENDIZ": "Aprendiz",
+      "TEMPORARIO": "Temporário"
+    },
+    "workMode": {
+      "PRESENCIAL": "Presencial",
+      "REMOTO": "Remoto",
+      "HIBRIDO": "Híbrido"
+    }
+  },
+  "students": {
+    "list": {
+      "title": "Talentos",
+      "subtitle": "Talentos da comunidade cadastrados pela sua empresa",
+      "new": "Novo talento",
+      "searchLabel": "Pesquisar talentos",
+      "searchPlaceholder": "Pesquisar por nome ou e-mail",
+      "filter": "Filtrar",
+      "pcdOnly": "Somente PCD",
+      "loading": "Carregando talentos...",
+      "emptyTitle": "Nenhum talento encontrado",
+      "emptySubtitle": "Adicione seu primeiro talento para começar.",
+      "columnName": "Nome",
+      "columnEmail": "E-mail",
+      "columnEducation": "Escolaridade",
+      "columnStatus": "Status",
+      "columnCourseStatus": "Conclusão de cursos",
+      "columnPoints": "Pontos"
+    },
+    "form": {
+      "editTitle": "Editar talento",
+      "newTitle": "Novo talento",
+      "communityId": "Comunidade",
+      "communityRequired": "A comunidade é obrigatória.",
+      "fullName": "Nome do aluno",
+      "fullNamePlaceholder": "Nome completo do aluno",
+      "fullNameRequired": "O nome do aluno é obrigatório.",
+      "fullNameTooLong": "O nome deve ter no máximo 150 caracteres.",
+      "email": "E-mail de contato",
+      "emailPlaceholder": "email@exemplo.com",
+      "emailRequired": "O e-mail de contato é obrigatório.",
+      "emailInvalid": "Informe um e-mail válido.",
+      "phone": "Telefone",
+      "phonePlaceholder": "(00) 00000-0000",
+      "address": "Endereço",
+      "addressPlaceholder": "Rua, número, bairro, cidade",
+      "coursePreferences": "Cursos de preferência",
+      "coursePreferencesHint": "Opcional. Selecione um ou mais cursos de interesse do aluno.",
+      "linkedUser": "Usuário vinculado",
+      "linkedUserPlaceholder": "Pesquise por nome ou e-mail",
+      "linkedUserHint": "Opcional. Vincule este talento a um usuário já cadastrado na Administração.",
+      "linkedUserLoading": "Carregando usuários...",
+      "linkedUserEmpty": "Nenhum usuário encontrado.",
+      "linkedUserClear": "Remover vínculo",
+      "education": "Escolaridade",
+      "educationPlaceholder": "Selecione a escolaridade",
+      "isPcd": "É pessoa com deficiência (PCD)?",
+      "pcdDescription": "Descrição da deficiência",
+      "pcdDescriptionPlaceholder": "Descreva a deficiência do talento",
+      "pcdDescriptionRequired": "A descrição da deficiência é obrigatória.",
+      "status": "Status",
+      "cancel": "Cancelar",
+      "saveChanges": "Salvar alterações",
+      "create": "Criar talento"
+    },
+    "detail": {
+      "loading": "Carregando talento...",
+      "defaultName": "Talento",
+      "education": "Escolaridade:",
+      "notInformed": "Não informado",
+      "pcd": "PCD",
+      "pcdDescription": "Deficiência:",
+      "coursesEnrolled": "Cursos matriculados",
+      "emptyCoursesTitle": "Nenhum curso ainda",
+      "emptyCoursesSubtitle": "Este talento não está matriculado em nenhum curso."
+    },
+    "deleteDialog": {
+      "title": "Excluir talento",
+      "message": "Tem certeza de que deseja excluir \"{{name}}\"? Esta ação não pode ser desfeita.",
+      "fallbackName": "este talento"
+    },
+    "notifications": {
+      "deleted": "Talento excluído com sucesso.",
+      "created": "Talento criado com sucesso.",
+      "updated": "Talento atualizado com sucesso."
+    },
+    "courseStatus": {
+      "NOT_STARTED": "Não iniciado",
+      "IN_PROGRESS": "Em andamento",
+      "COMPLETED": "Concluído",
+      "summary": "{{completed}}/{{total}} cursos concluídos",
+      "progressPercent": "{{percent}}% concluído"
+    },
+    "gamification": {
+      "title": "Gamificação",
+      "pointsShort": "{{points}} pts",
+      "level": "Nível {{level}} · {{label}}",
+      "nextLevel": "Faltam {{points}} pontos para o próximo nível.",
+      "placeholderNote": "Prévia da gamificação: pontos, níveis e conquistas em breve."
+    }
+  },
+  "errors": {
+    "sessionInvalid": "Sua sessão não pôde ser validada. Atualize a página. Se isso continuar acontecendo, saia e entre novamente.",
+    "forbidden": "Você não tem permissão para realizar esta ação.",
+    "unreachable": "Não foi possível conectar ao servidor. Verifique sua conexão.",
+    "serverError": "Algo deu errado do nosso lado. Tente novamente.",
+    "genericRequestError": "Não foi possível concluir a solicitação."
+  },
+  "marketing": {
+    "partnersSplash": {
+      "title": "Nossos parceiros",
+      "subtitle": "Empresas e instituições que apoiam a qualificação profissional na sua comunidade.",
+      "enter": "Entrar na plataforma"
+    },
+    "partnersList": {
+      "title": "Parceiros",
+      "subtitle": "Empresas e instituições que apoiam a qualificação profissional na sua comunidade.",
+      "platinumTitle": "Parceiros Platinum",
+      "goldTitle": "Parceiros Gold",
+      "silverTitle": "Parceiros Silver"
+    }
+  },
+  "courseModules": {
+    "list": {
+      "new": "Novo módulo",
+      "loading": "Carregando módulos...",
+      "emptyTitle": "Nenhum módulo cadastrado",
+      "emptySubtitle": "Crie o primeiro módulo deste curso para começar."
+    },
+    "modality": {
+      "online": "Online",
+      "presencial": "Presencial"
+    },
+    "form": {
+      "editTitle": "Editar módulo",
+      "newTitle": "Novo módulo",
+      "title": "Título",
+      "titlePlaceholder": "Título do módulo",
+      "titleRequired": "O título é obrigatório.",
+      "description": "Descrição",
+      "order": "Ordem",
+      "orderRequired": "Informe uma ordem válida (mínimo 1).",
+      "modality": "Modalidade",
+      "status": "Status",
+      "presencialCompany": "Empresa responsável",
+      "presencialCompanyRequired": "Selecione a empresa que fornece o módulo presencial.",
+      "noCompaniesHint": "Nenhuma empresa cadastrada ainda.",
+      "agendaHint": "Depois de salvar o módulo, você poderá montar a agenda de encontros na tela de detalhes.",
+      "cancel": "Cancelar",
+      "saveChanges": "Salvar alterações",
+      "create": "Criar módulo",
+      "points": "Pontos de gamificação",
+      "pointsHint": "Pontos que o aluno ganha ao concluir este módulo.",
+      "pointsRequired": "Informe uma pontuação válida (mínimo 0)."
+    },
+    "detail": {
+      "loading": "Carregando módulo...",
+      "editModule": "Editar módulo",
+      "manageContent": "Gerenciar conteúdo",
+      "presencialTitle": "Módulo presencial",
+      "companyUnknown": "Empresa não informada",
+      "agendaTitle": "Agenda de encontros",
+      "emptyAgendaTitle": "Nenhum encontro agendado",
+      "emptyAgendaSubtitle": "Adicione datas para este módulo presencial.",
+      "addSession": "Adicionar encontro",
+      "sessionDate": "Data",
+      "sessionDateRequired": "A data é obrigatória.",
+      "sessionStart": "Início",
+      "sessionEnd": "Término",
+      "sessionLocation": "Local",
+      "sessionNotes": "Observações",
+      "saveSession": "Salvar encontro",
+      "sessionAdded": "Encontro adicionado à agenda.",
+      "sessionDeleted": "Encontro removido da agenda.",
+      "deleteSessionTitle": "Remover encontro",
+      "deleteSessionMessage": "Tem certeza de que deseja remover o encontro de {{date}}?",
+      "contentTitle": "Conteúdo do módulo",
+      "emptyContentTitle": "Nenhum conteúdo adicionado",
+      "emptyContentSubtitle": "Use \"Gerenciar conteúdo\" para inserir textos, vídeos, imagens ou documentos.",
+      "pointsChip": "{{points}} pts"
+    },
+    "content": {
+      "loading": "Carregando conteúdo...",
+      "title": "Gerenciar conteúdo",
+      "currentBlocksTitle": "Conteúdo atual",
+      "reorderHint": "Arraste pelo ícone ⠿ ou use as setas para reordenar. Clique em Salvar para aplicar a nova ordem.",
+      "dragHandle": "Arrastar para reordenar",
+      "moveUp": "Mover para cima",
+      "moveDown": "Mover para baixo",
+      "save": "Salvar",
+      "orderSaved": "Ordem do conteúdo salva.",
+      "untitledText": "Texto sem título",
+      "unknownMedia": "Mídia removida",
+      "addTextTab": "Adicionar texto",
+      "textTitle": "Título (opcional)",
+      "textBody": "Conteúdo",
+      "textBodyPlaceholder": "Escreva o conteúdo textual do módulo...",
+      "textBodyRequired": "O conteúdo é obrigatório.",
+      "addTextButton": "Adicionar texto",
+      "textAdded": "Conteúdo textual adicionado.",
+      "addMediaTab": "Adicionar mídia",
+      "uploadHint": "Envie um novo arquivo (vídeo, imagem ou documento) ou selecione um já enviado abaixo.",
+      "uploadSuccess": "Arquivo enviado para a biblioteca de mídia.",
+      "uploadError": "Não foi possível enviar o arquivo.",
+      "mediaSelect": "Mídia",
+      "mediaSelectRequired": "Selecione uma mídia.",
+      "noMediaHint": "Nenhuma mídia enviada ainda para este curso.",
+      "mediaCaption": "Legenda (opcional)",
+      "addMediaButton": "Referenciar mídia no módulo",
+      "mediaAdded": "Mídia referenciada no conteúdo do módulo.",
+      "deleteBlockTitle": "Remover conteúdo",
+      "deleteBlockMessage": "Tem certeza de que deseja remover este item do conteúdo do módulo?",
+      "blockDeleted": "Item de conteúdo removido."
+    },
+    "deleteDialog": {
+      "title": "Excluir módulo",
+      "message": "Tem certeza de que deseja excluir o módulo \"{{name}}\"? Esta ação não pode ser desfeita."
+    },
+    "notifications": {
+      "created": "Módulo criado com sucesso.",
+      "updated": "Módulo atualizado com sucesso.",
+      "deleted": "Módulo excluído com sucesso.",
+      "saveError": "Não foi possível salvar o módulo."
+    }
+  },
+  "admin": {
+    "title": "Administração",
+    "subtitle": "Cadastre usuários da plataforma e gerencie a criação de comunidades e cursos.",
+    "tabs": {
+      "users": "Usuários",
+      "communities": "Comunidades",
+      "courses": "Cursos"
+    },
+    "users": {
+      "title": "Usuários cadastrados",
+      "subtitle": "Estes usuários ficam disponíveis para vínculo ao cadastrar um talento.",
+      "newTitle": "Novo usuário",
+      "editTitle": "Editar usuário",
+      "fullName": "Nome completo",
+      "fullNamePlaceholder": "Nome completo do usuário",
+      "fullNameRequired": "O nome é obrigatório.",
+      "email": "E-mail",
+      "emailPlaceholder": "email@exemplo.com",
+      "emailRequired": "O e-mail é obrigatório.",
+      "emailInvalid": "Informe um e-mail válido.",
+      "role": "Perfil",
+      "roleRequired": "Selecione um perfil.",
+      "rolePlaceholder": "Selecione o perfil do usuário",
+      "phone": "Telefone",
+      "phonePlaceholder": "(00) 00000-0000",
+      "address": "Endereço",
+      "addressPlaceholder": "Rua, número, bairro, cidade",
+      "create": "Cadastrar usuário",
+      "saveChanges": "Salvar alterações",
+      "columnName": "Nome",
+      "columnEmail": "E-mail",
+      "columnRole": "Perfil",
+      "emptyTitle": "Nenhum usuário cadastrado",
+      "emptySubtitle": "Cadastre o primeiro usuário da plataforma.",
+      "loading": "Carregando usuários...",
+      "createdSuccess": "Usuário cadastrado com sucesso.",
+      "updatedSuccess": "Usuário atualizado com sucesso.",
+      "new": "Novo usuário",
+      "searchLabel": "Pesquisar usuários",
+      "searchPlaceholder": "Nome ou e-mail",
+      "search": "Pesquisar",
+      "emptySearchTitle": "Nenhum usuário encontrado",
+      "emptySearchSubtitle": "Ajuste os termos da pesquisa ou cadastre um novo usuário.",
+      "community": "Comunidade",
+      "communityRequired": "A comunidade é obrigatória.",
+      "communityPlaceholder": "Selecione a comunidade",
+      "columnCommunity": "Comunidade",
+      "communityAdminHint": "Administradores têm acesso a todas as comunidades.",
+      "communityAll": "Todas",
+      "company": "Empresa",
+      "companyRequired": "A empresa é obrigatória.",
+      "companyPlaceholder": "Selecione a empresa"
+    },
+    "roles": {
+      "ROLE_ADMIN": "Administrador",
+      "ROLE_EMPRESARIO": "Empresário",
+      "ROLE_ALUNO": "Aluno",
+      "ROLE_PODER_PUBLICO": "Poder público"
+    },
+    "communities": {
+      "title": "Comunidades",
+      "description": "O cadastro de novas comunidades é feito somente por aqui.",
+      "new": "Nova comunidade"
+    },
+    "courses": {
+      "title": "Cursos",
+      "description": "O cadastro de novos cursos é feito somente por aqui.",
+      "new": "Novo curso"
+    }
+  }
+}

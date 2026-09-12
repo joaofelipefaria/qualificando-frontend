@@ -1,0 +1,89 @@
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.page-subtitle {
+  margin: 4px 0 0;
+  color: #5f6368;
+}
+
+.tab-content {
+  padding: 20px 4px;
+}
+
+.button-spinner {
+  display: inline-block;
+}
+
+.section-title {
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+.section-subtitle {
+  margin: 0 0 16px;
+  color: #5f6368;
+}
+
+.table-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+table {
+  width: 100%;
+}
+
+.action-card {
+  max-width: 640px;
+  border-radius: 16px;
+}
+
+.action-card h2 {
+  margin-top: 0;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.tab-toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.tab-description {
+  margin: 0;
+  color: #5f6368;
+  max-width: 640px;
+}
+
+.search-form {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.search-field {
+  min-width: 280px;
+}

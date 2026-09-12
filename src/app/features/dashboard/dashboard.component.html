@@ -1,0 +1,41 @@
+<div class="page-header">
+  <h1>{{ 'dashboard.title' | translate }}</h1>
+  <p class="page-subtitle">{{ 'dashboard.subtitle' | translate }}</p>
+</div>
+
+<app-loading-spinner *ngIf="loading" [message]="'dashboard.loading' | translate"></app-loading-spinner>
+
+<ng-container *ngIf="!loading">
+  <div class="summary-grid">
+    <mat-card
+      class="summary-card"
+      *ngFor="let card of cards"
+      [routerLink]="card.route">
+      <div class="summary-icon" [ngClass]="card.accent">
+        <mat-icon>{{ card.icon }}</mat-icon>
+      </div>
+      <div class="summary-body">
+        <span class="summary-value">{{ card.value }}</span>
+        <span class="summary-label">{{ card.labelKey | translate }}</span>
+      </div>
+    </mat-card>
+  </div>
+
+  <mat-card class="activity-card">
+    <mat-card-header>
+      <mat-card-title>{{ 'dashboard.recentCourses' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="activity-list" *ngIf="recentCourses.length; else noActivity">
+        <a class="activity-row" *ngFor="let course of recentCourses" [routerLink]="['/courses', course.id]">
+          <mat-icon>menu_book</mat-icon>
+          <span class="activity-name">{{ course.name }}</span>
+          <span class="activity-meta">{{ 'dashboard.studentsCount' | translate: { count: course.studentsCount ?? 0 } }}</span>
+        </a>
+      </div>
+      <ng-template #noActivity>
+        <p class="empty-text">{{ 'dashboard.noRecentCourses' | translate }}</p>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

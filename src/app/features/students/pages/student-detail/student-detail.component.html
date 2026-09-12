@@ -1,0 +1,78 @@
+<app-loading-spinner *ngIf="loading" [message]="'students.detail.loading' | translate"></app-loading-spinner>
+
+<ng-container *ngIf="!loading && student">
+  <div class="page-header">
+    <button mat-icon-button routerLink="/talentos" [attr.aria-label]="'common.back' | translate">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>{{ student.fullName || ('students.detail.defaultName' | translate) }}</h1>
+    <span class="spacer"></span>
+    <button mat-stroked-button [routerLink]="['/talentos', student.id, 'edit']">
+      <mat-icon>edit</mat-icon>
+      {{ 'common.edit' | translate }}
+    </button>
+  </div>
+
+  <mat-card class="header-card">
+    <mat-card-content class="header-card-content">
+      <app-student-avatar [name]="student.fullName || '?'" [photoUrl]="student.photoUrl" [seed]="student.id" [size]="64"></app-student-avatar>
+      <div>
+        <p class="description">{{ student.email }}</p>
+        <p class="description">{{ 'students.detail.education' | translate }} {{ student.education || ('students.detail.notInformed' | translate) }}</p>
+        <p class="description" *ngIf="student.isPcd">{{ 'students.detail.pcdDescription' | translate }} {{ student.pcdDescription || ('students.detail.notInformed' | translate) }}</p>
+        <mat-chip [class.status-active]="student.status === 'ACTIVE'" [class.status-inactive]="student.status !== 'ACTIVE'">
+          {{ (student.status === 'ACTIVE' ? 'common.active' : 'common.inactive') | translate }}
+        </mat-chip>
+        <mat-chip class="pcd-chip" *ngIf="student.isPcd">
+          {{ 'students.detail.pcd' | translate }}
+        </mat-chip>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="detail-tabs" *ngIf="gamificationSummary as gam">
+    <mat-card-header>
+      <mat-card-title>{{ 'students.gamification.title' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="gamification-content">
+      <div class="gamification-stat">
+        <mat-icon class="gamification-icon">military_tech</mat-icon>
+        <div>
+          <div class="gamification-value">{{ 'students.gamification.pointsShort' | translate: { points: gam.totalPoints } }}</div>
+          <div class="gamification-caption">{{ 'students.gamification.level' | translate: { level: gam.level, label: gam.levelLabel } }}</div>
+        </div>
+      </div>
+      <p class="gamification-next" *ngIf="gam.pointsToNextLevel > 0">
+        {{ 'students.gamification.nextLevel' | translate: { points: gam.pointsToNextLevel } }}
+      </p>
+      <p class="gamification-placeholder-note">{{ 'students.gamification.placeholderNote' | translate }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="detail-tabs">
+    <mat-card-header>
+      <mat-card-title>{{ 'students.detail.coursesEnrolled' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-empty-state
+        *ngIf="!courses.length"
+        icon="menu_book"
+        [title]="'students.detail.emptyCoursesTitle' | translate"
+        [subtitle]="'students.detail.emptyCoursesSubtitle' | translate"
+      ></app-empty-state>
+
+      <mat-nav-list *ngIf="courses.length">
+        <a mat-list-item *ngFor="let course of courses" [routerLink]="['/courses', course.id]">
+          <mat-icon matListItemIcon>menu_book</mat-icon>
+          <span matListItemTitle>{{ course.name }}</span>
+          <span matListItemLine *ngIf="progressByCourseId.get(course.id) as progress">
+            {{ 'students.courseStatus.progressPercent' | translate: { percent: progress.progressPercent } }}
+          </span>
+          <mat-chip matListItemMeta [class]="courseStatusClass(course.id)">
+            {{ 'students.courseStatus.' + (progressByCourseId.get(course.id)?.status ?? 'NOT_STARTED') | translate }}
+          </mat-chip>
+        </a>
+      </mat-nav-list>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

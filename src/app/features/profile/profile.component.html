@@ -1,0 +1,127 @@
+<div class="page-header">
+  <h1>{{ 'profile.title' | translate }}</h1>
+</div>
+
+<mat-card class="profile-card" *ngIf="loading">
+  <mat-card-content>
+    <app-loading-spinner [message]="'profile.loading' | translate"></app-loading-spinner>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="profile-card" *ngIf="!loading">
+  <mat-card-content>
+    <div class="avatar-large">{{ initials }}</div>
+
+    <ng-container *ngIf="!editing">
+      <h2>{{ details?.fullName }}</h2>
+      <p class="email">{{ details?.email }}</p>
+
+      <p class="detail-line" *ngIf="details?.phone">
+        <mat-icon inline>phone</mat-icon> {{ details?.phone }}
+      </p>
+
+      <p class="detail-line" *ngIf="details?.address">
+        <mat-icon inline>place</mat-icon> {{ details?.address }}
+      </p>
+
+      <div class="roles" *ngIf="userProfile.roles.length">
+        <mat-chip *ngFor="let role of userProfile.roles">
+          {{ role }}
+        </mat-chip>
+      </div>
+
+      <p
+        *ngIf="!userProfile.roles.length"
+        class="no-roles"
+      >
+        {{ 'profile.noRoles' | translate }}
+      </p>
+
+      <button
+        mat-flat-button
+        color="primary"
+        class="edit-button"
+        (click)="startEditing()"
+      >
+        <mat-icon>edit</mat-icon>
+        {{ 'profile.edit' | translate }}
+      </button>
+    </ng-container>
+
+    <form
+      [formGroup]="form"
+      (ngSubmit)="submit()"
+      *ngIf="editing"
+      class="edit-form"
+    >
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'profile.fullName' | translate }}</mat-label>
+        <input matInput formControlName="fullName">
+
+        <mat-error *ngIf="form.controls.fullName.hasError('required')">
+          {{ 'profile.fullNameRequired' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'profile.email' | translate }}</mat-label>
+        <input matInput type="email" formControlName="email">
+
+        <mat-error *ngIf="form.controls.email.hasError('required')">
+          {{ 'profile.emailRequired' | translate }}
+        </mat-error>
+
+        <mat-error *ngIf="form.controls.email.hasError('email')">
+          {{ 'profile.emailInvalid' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'profile.phone' | translate }}</mat-label>
+        <input
+          matInput
+          formControlName="phone"
+          [placeholder]="'profile.phonePlaceholder' | translate"
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'profile.address' | translate }}</mat-label>
+        <input
+          matInput
+          formControlName="address"
+          [placeholder]="'profile.addressPlaceholder' | translate"
+        >
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button
+          mat-button
+          type="button"
+          (click)="cancelEditing()"
+          [disabled]="saving"
+        >
+          {{ 'profile.cancel' | translate }}
+        </button>
+
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          [disabled]="saving"
+        >
+          <mat-progress-spinner
+            *ngIf="saving"
+            mode="indeterminate"
+            diameter="18"
+            class="button-spinner"
+          ></mat-progress-spinner>
+
+          <span *ngIf="!saving">
+            {{ 'profile.save' | translate }}
+          </span>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
