@@ -1,5 +1,5 @@
 # ---- Stage 1: build ----
-FROM node:20-alpine AS build
+FROM node:20.18-alpine AS build
 WORKDIR /app
 
 COPY package.json package-lock.json ./
@@ -9,7 +9,7 @@ COPY . .
 RUN npm run build -- --configuration=production
 
 # ---- Stage 2: runtime ----
-FROM nginx:alpine
+FROM nginx:1.27-alpine
 COPY --from=build /app/dist/qualificando-frontend /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 8080
