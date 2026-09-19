@@ -57,3 +57,33 @@
 .training-hours-row mat-form-field {
   flex: 1;
 }
+
+.slider-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.slider-field mat-label {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 4px;
+}
+
+.slider-hints {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.54);
+  margin-top: 4px;
+}
+
+.slider-errors {
+  margin-top: 4px;
+}
+
+.slider-errors mat-error {
+  font-size: 12px;
+}

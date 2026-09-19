@@ -5,8 +5,7 @@ export interface Course {
   communityId: number;
   name: string;
   description?: string;
-  duration?: string;
-  imageUrl?: string;
+  duration?: number;
   status: EntityStatus;
   studentsCount?: number;
 }
@@ -15,7 +14,6 @@ export interface CourseFormValue {
   communityId: number;
   name: string;
   description?: string;
-  duration?: string;
-  imageUrl?: string;
+  duration?: number;
   status: EntityStatus;
 }

@@ -3,12 +3,14 @@ import { FirebaseApp, initializeApp } from 'firebase/app';
 import {
   Auth,
   User,
+  connectAuthEmulator,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut
 } from 'firebase/auth';
 import { firebaseConfig } from './firebase.config';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class FirebaseAuthService {
@@ -21,6 +23,10 @@ export class FirebaseAuthService {
   constructor() {
     this.app = initializeApp(firebaseConfig);
     this.auth = getAuth(this.app);
+
+    if (environment.useFirebaseEmulator) {
+      connectAuthEmulator(this.auth, 'http://localhost:9099', { disableWarnings: true });
+    }
 
     onAuthStateChanged(this.auth, user => {
       this.currentUser = user;

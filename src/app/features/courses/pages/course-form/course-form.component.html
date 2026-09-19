@@ -31,15 +31,31 @@
         <textarea matInput formControlName="description" rows="3"></textarea>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>{{ 'courses.form.duration' | translate }}</mat-label>
-        <input matInput formControlName="duration" [placeholder]="'courses.form.durationPlaceholder' | translate">
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>{{ 'courses.form.imageUrl' | translate }}</mat-label>
-        <input matInput formControlName="imageUrl" placeholder="https://...">
-      </mat-form-field>
+      <div class="full-width slider-field" *ngIf="showDuration">
+        <mat-label>{{ 'courses.form.estimatedDuration' | translate }}</mat-label>
+        <mat-slider
+          formControlName="duration"
+          [min]="MIN_DURATION"
+          [max]="MAX_DURATION"
+          step="1"
+          thumbLabel>
+        </mat-slider>
+        <div class="slider-hints">
+          <span>{{ 'courses.form.durationHint' | translate }}</span>
+          <span>{{ durationLabel }}</span>
+        </div>
+        <div class="slider-errors" *ngIf="form.controls.duration.invalid && (form.controls.duration.dirty || form.controls.duration.touched)">
+          <mat-error *ngIf="form.controls.duration.hasError('required')">
+            {{ 'courses.form.durationRequired' | translate }}
+          </mat-error>
+          <mat-error *ngIf="form.controls.duration.hasError('min')">
+            {{ 'courses.form.durationMin' | translate: { min: MIN_DURATION } }}
+          </mat-error>
+          <mat-error *ngIf="form.controls.duration.hasError('max')">
+            {{ 'courses.form.durationMax' | translate: { max: MAX_DURATION } }}
+          </mat-error>
+        </div>
+      </div>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>{{ 'courses.form.status' | translate }}</mat-label>

@@ -1,7 +1,7 @@
 <app-loading-spinner *ngIf="loading" [message]="'courses.detail.loading' | translate"></app-loading-spinner>
 
 <ng-container *ngIf="!loading && course">
-  <div class="hero" [style.backgroundImage]="course.imageUrl ? 'url(' + course.imageUrl + ')' : null">
+  <div class="hero">
     <div class="hero-overlay">
       <button mat-icon-button routerLink="/courses" [attr.aria-label]="'common.back' | translate" class="back-button">
         <mat-icon>arrow_back</mat-icon>
@@ -26,7 +26,7 @@
   <mat-tab-group class="detail-tabs">
     <mat-tab [label]="'courses.detail.overviewTab' | translate">
       <div class="tab-content">
-        <p><strong>{{ 'courses.detail.duration' | translate }}</strong> {{ course.duration || ('courses.detail.notInformed' | translate) }}</p>
+        <p><strong>{{ 'courses.detail.duration' | translate }}</strong> {{ course.duration ? ('courses.detail.durationWeeks' | translate: { weeks: course.duration }) : ('courses.detail.notInformed' | translate) }}</p>
         <p><strong>{{ 'courses.detail.status' | translate }}</strong> {{ (course.status === 'ACTIVE' ? 'common.active' : 'common.inactive') | translate }}</p>
       </div>
     </mat-tab>

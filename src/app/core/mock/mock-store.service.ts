@@ -186,7 +186,7 @@ export class MockStoreService {
       communityId: 1,
       name: 'Introdução à Logística',
       description: 'Fundamentos de logística e cadeia de suprimentos para o mercado de trabalho local.',
-      duration: '40h',
+      duration: 40,
       status: 'ACTIVE',
       studentsCount: 28
     },
@@ -195,7 +195,7 @@ export class MockStoreService {
       communityId: 1,
       name: 'Atendimento ao Cliente',
       description: 'Boas práticas de atendimento presencial e digital, com oficina prática em empresa parceira.',
-      duration: '32h',
+      duration: 32,
       status: 'ACTIVE',
       studentsCount: 41
     },
@@ -204,7 +204,7 @@ export class MockStoreService {
       communityId: 2,
       name: 'Fundamentos de Cooperativismo',
       description: 'Introdução ao cooperativismo e economia solidária.',
-      duration: '24h',
+      duration: 24,
       status: 'ACTIVE',
       studentsCount: 15
     }
@@ -442,7 +442,6 @@ export class MockStoreService {
       name: value.name,
       description: value.description,
       duration: value.duration,
-      imageUrl: value.imageUrl,
       status: value.status,
       studentsCount: 0
     };
@@ -458,7 +457,6 @@ export class MockStoreService {
     existing.name = value.name;
     existing.description = value.description;
     existing.duration = value.duration;
-    existing.imageUrl = value.imageUrl;
     existing.status = value.status;
     return this.simulate(this.clone(existing));
   }

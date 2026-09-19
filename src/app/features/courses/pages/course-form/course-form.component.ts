@@ -1,14 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { FormBuilder, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button';
+import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { finalize, switchMap, tap } from 'rxjs';
 import { CourseService } from '../../services/course.service';
@@ -21,8 +22,9 @@ import { NotificationService } from '../../../../core/services/notification.serv
   standalone: true,
   imports: [
     NgIf, NgFor, RouterLink, ReactiveFormsModule,
-    MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule,
-    MatButtonModule, MatIconModule, MatProgressSpinnerModule, TranslateModule
+    MatCardModule, MatFormFieldModule, MatSelectModule,
+    MatSliderModule, MatIconModule, MatProgressSpinnerModule,
+    MatButtonModule, MatInputModule, TranslateModule
   ],
   templateUrl: './course-form.component.html',
   styleUrl: '../../../communities/pages/community-form/community-form.component.scss'
@@ -42,12 +44,14 @@ export class CourseFormComponent implements OnInit {
   communities: Community[] = [];
   communitiesLoading = true;
 
+  readonly MIN_DURATION = 1;
+  readonly MAX_DURATION = 104;
+
   form = this.fb.group({
     communityId: [null as number | null, Validators.required],
     name: ['', [Validators.required, Validators.maxLength(150)]],
     description: [''],
-    duration: [''],
-    imageUrl: [''],
+    duration: [8 as number, [Validators.required, Validators.min(this.MIN_DURATION), Validators.max(this.MAX_DURATION)]],
     status: ['ACTIVE', Validators.required]
   });
 
@@ -55,12 +59,20 @@ export class CourseFormComponent implements OnInit {
     return this.courseId !== null;
   }
 
+  get showDuration(): boolean {
+    return this.isEditMode;
+  }
+
+  get durationControl(): FormControl<number> {
+    return this.form.controls.duration as FormControl<number>;
+  }
+
+  get durationLabel(): string {
+    const value = this.durationControl.value ?? 0;
+    return this.translate.instant('courses.form.durationWeeks', { weeks: value });
+  }
+
   ngOnInit(): void {
-    // Loads the communities first and only *then* resolves - patching the
-    // course onto the form before this resolves would race the mat-select's
-    // options (still empty) against the value, and the community could end
-    // up not shown as selected. Chaining with switchMap guarantees the
-    // options exist by the time we patch the value below.
     const communities$ = this.communityService.list(0, 100).pipe(
       tap(page => (this.communities = page.content)),
       finalize(() => (this.communitiesLoading = false))
@@ -75,7 +87,7 @@ export class CourseFormComponent implements OnInit {
           switchMap(() => this.courseService.getById(this.courseId!)),
           finalize(() => (this.loading = false))
         )
-        .subscribe(course => this.form.patchValue(course));
+        .subscribe(course => this.form.patchValue({ duration: course.duration ?? 8 }));
     } else {
       communities$.subscribe();
     }
